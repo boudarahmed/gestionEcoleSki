@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import be.belouh.POJO.Administrateur;
 
@@ -47,7 +49,7 @@ public class AdministrateurDAO extends DAO<Administrateur> {
 
 			stmtPers.setString(1, obj.getNom());
 			stmtPers.setString(2, obj.getPrenom());
-			stmtPers.setDate(3, new java.sql.Date(obj.getDateNaissance().getTime()));
+			stmtPers.setString(3, new SimpleDateFormat("yyyy-MM-dd").format((obj.getDateNaissance())));
 			stmtPers.setString(4, String.valueOf(obj.getSexe()));
 			stmtPers.setString(5, obj.getVille());
 			stmtPers.setString(6, obj.getCodePostal());
@@ -96,7 +98,7 @@ public class AdministrateurDAO extends DAO<Administrateur> {
 
 			stmtPers.setString(1, obj.getNom());
 			stmtPers.setString(2, obj.getPrenom());
-			stmtPers.setDate(3, new java.sql.Date(obj.getDateNaissance().getTime()));
+			stmtPers.setString(3, new SimpleDateFormat("yyyy-MM-dd").format((obj.getDateNaissance())));
 			stmtPers.setString(4, String.valueOf(obj.getSexe()));
 			stmtPers.setString(5, obj.getVille());
 			stmtPers.setString(6, obj.getCodePostal());
@@ -120,11 +122,7 @@ public class AdministrateurDAO extends DAO<Administrateur> {
 
 	@Override
 	public Administrateur trouver(Administrateur obj) {
-		String sql = "SELECT PERSONNE.IDPERSONNE, PERSONNE.NOM, PERSONNE.PRENOM, PERSONNE.DATENAISSANCE, PERSONNE.SEXE, "
-				+ "PERSONNE.VILLE, PERSONNE.CODEPOSTAL, PERSONNE.NUMERO, PERSONNE.RUE, ADMINISTRATEUR.POSTE"
-				+ "FROM PERSONNE JOIN UTILISATEUR ON PERSONNE.IDPERSONNE = UTILISATEUR.IDUTILISATEUR"
-				+ "JOIN ADMINISTRATEUR ON UTILISATEUR.IDUTILISATEUR = ADMINISTRATEUR.IDADMINISTRATEUR"
-				+ "WHERE UTILISATEUR.ADRESSEMAIL = ? AND UTILISATEUR.MOTDEPASSE = ?";
+		String sql = "SELECT PERSONNE.IDPERSONNE, PERSONNE.NOM, PERSONNE.PRENOM, PERSONNE.DATENAISSANCE, PERSONNE.SEXE, PERSONNE.VILLE, PERSONNE.CODEPOSTAL, PERSONNE.NUMERO, PERSONNE.RUE, ADMINISTRATEUR.POSTE FROM PERSONNE JOIN UTILISATEUR ON PERSONNE.IDPERSONNE = UTILISATEUR.IDUTILISATEUR JOIN ADMINISTRATEUR ON UTILISATEUR.IDUTILISATEUR = ADMINISTRATEUR.IDADMINISTRATEUR WHERE UTILISATEUR.ADRESSEMAIL = ? AND UTILISATEUR.MOTDEPASSE = ?";
 
 		try {
 			PreparedStatement stmt = c.prepareStatement(sql);
@@ -138,7 +136,7 @@ public class AdministrateurDAO extends DAO<Administrateur> {
 				obj.setId(rs.getInt("IDPERSONNE"));
 				obj.setNom(rs.getString("NOM"));
 				obj.setPrenom(rs.getString("PRENOM"));
-				obj.setDateNaissance(rs.getDate("DATENAISSANCE"));
+				obj.setDateNaissance(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("DATENAISSANCE")));
 				obj.setSexe(rs.getString("SEXE").charAt(0));
 				obj.setVille(rs.getString("VILLE"));
 				obj.setCodePostal(rs.getString("CODEPOSTAL"));
@@ -146,10 +144,11 @@ public class AdministrateurDAO extends DAO<Administrateur> {
 				obj.setRue(rs.getString("RUE"));
 				obj.setPoste(rs.getString("POSTE"));
 			}
+		} catch (ParseException ex) {
+			ex.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return obj;
 	}
-
 }
