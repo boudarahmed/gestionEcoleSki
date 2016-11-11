@@ -33,6 +33,14 @@ public abstract class Cours {
 	}
 
 	// GETTERS ET SETTERS
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 	public void setStatutCours(String statutCours) {
 		this.statutCours = statutCours;
 	}

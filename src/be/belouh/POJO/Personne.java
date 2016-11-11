@@ -42,6 +42,14 @@ public abstract class Personne {
 	}
 
 	// GETTERS ET SETTERS
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}

@@ -23,6 +23,14 @@ public class Accreditation {
 	}
 
 	// GETTERS ET SETTERS
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 	public void setSport(String sport) {
 		this.sport = sport;
 	}

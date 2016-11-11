@@ -41,6 +41,14 @@ public class Reservation {
 	}
 
 	// GETTERS ET SETTERS
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 	public void setDateReservation(Date dateReservation) {
 		this.dateReservation = dateReservation;
 	}

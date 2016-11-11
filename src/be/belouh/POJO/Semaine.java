@@ -18,6 +18,14 @@ public class Semaine {
 	}
 
 	// GETTERS ET SETTERS
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 	public void setDateDeb(Date dateDeb) {
 		this.dateDeb = dateDeb;
 	}

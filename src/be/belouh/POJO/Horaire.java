@@ -20,6 +20,14 @@ public class Horaire {
 	}
 
 	// GETTERS ET SETTERS
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 	public void setHeureDeb(int heureDeb) {
 		this.heureDeb = heureDeb;
 	}
