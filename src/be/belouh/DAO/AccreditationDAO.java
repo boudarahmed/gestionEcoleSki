@@ -117,5 +117,4 @@ public class AccreditationDAO extends DAO<Accreditation> {
 		}
 		return obj;
 	}
-
 }
