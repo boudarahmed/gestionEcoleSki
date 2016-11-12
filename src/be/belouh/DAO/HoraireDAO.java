@@ -65,7 +65,7 @@ public class HoraireDAO extends DAO<Horaire> {
 
 			stmt.setInt(1, obj.getHeureDeb());
 			stmt.setInt(2, obj.getHeureFin());
-			stmt.setInt(3,  obj.getId());
+			stmt.setInt(3, obj.getId());
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
