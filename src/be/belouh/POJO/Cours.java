@@ -32,6 +32,10 @@ public abstract class Cours {
 		setListeReservation(listeReservation);
 	}
 
+	public Cours() {
+
+	}
+
 	// GETTERS ET SETTERS
 	public void setId(int id) {
 		this.id = id;

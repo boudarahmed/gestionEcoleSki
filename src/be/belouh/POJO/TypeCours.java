@@ -28,6 +28,10 @@ public class TypeCours {
 		setAccreditation(accreditation);
 	}
 
+	public TypeCours() {
+
+	}
+
 	// GETTERS ET SETTERS
 	public void setId(int id) {
 		this.id = id;

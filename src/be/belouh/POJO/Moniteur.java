@@ -36,6 +36,10 @@ public class Moniteur extends Utilisateur {
 		setListeAccreditation(listeAccreditation);
 	}
 
+	public Moniteur() {
+		super();
+	}
+
 	// GETTERS ET SETTERS
 	public void setSalaireHoraire(double salaireHoraire) {
 		this.salaireHoraire = salaireHoraire;

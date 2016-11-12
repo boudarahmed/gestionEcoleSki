@@ -22,6 +22,10 @@ public class Accreditation {
 		setAgeMax(ageMax);
 	}
 
+	public Accreditation() {
+
+	}
+
 	// GETTERS ET SETTERS
 	public void setId(int id) {
 		this.id = id;

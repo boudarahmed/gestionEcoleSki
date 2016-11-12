@@ -6,10 +6,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import be.belouh.POJO.Administrateur;
 
 public class AdministrateurDAO extends DAO<Administrateur> {
+
+	@Override
+	public ArrayList<Integer> compter() {
+		ArrayList<Integer> tab = new ArrayList<Integer>();
+		String sql = "SELECT PERSONNE.IDPERSONNE FROM PERSONNE JOIN UTILISATEUR ON PERSONNE.IDPERSONNE = UTILISATEUR.IDUTILISATEUR JOIN ADMINISTRATEUR ON UTILISATEUR.IDUTILISATEUR = ADMINISTRATEUR.IDADMINISTRATEUR";
+
+		try {
+			Statement stmt = c.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				tab.add(rs.getInt("IDPERSONNE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tab;
+	}
 
 	@Override
 	public boolean supprimer(Administrateur obj) {
@@ -121,14 +141,13 @@ public class AdministrateurDAO extends DAO<Administrateur> {
 	}
 
 	@Override
-	public Administrateur trouver(Administrateur obj) {
-		String sql = "SELECT PERSONNE.IDPERSONNE, PERSONNE.NOM, PERSONNE.PRENOM, PERSONNE.DATENAISSANCE, PERSONNE.SEXE, PERSONNE.VILLE, PERSONNE.CODEPOSTAL, PERSONNE.NUMERO, PERSONNE.RUE, ADMINISTRATEUR.POSTE FROM PERSONNE JOIN UTILISATEUR ON PERSONNE.IDPERSONNE = UTILISATEUR.IDUTILISATEUR JOIN ADMINISTRATEUR ON UTILISATEUR.IDUTILISATEUR = ADMINISTRATEUR.IDADMINISTRATEUR WHERE UTILISATEUR.ADRESSEMAIL = ? AND UTILISATEUR.MOTDEPASSE = ?";
-
+	public Administrateur trouver(int id) {
+		String sql = "SELECT PERSONNE.IDPERSONNE, PERSONNE.NOM, PERSONNE.PRENOM, PERSONNE.DATENAISSANCE, PERSONNE.SEXE, PERSONNE.VILLE, PERSONNE.CODEPOSTAL, PERSONNE.NUMERO, PERSONNE.RUE, UTILISATEUR.ADRESSEMAIL, UTILISATEUR.MOTDEPASSE, ADMINISTRATEUR.POSTE FROM PERSONNE JOIN UTILISATEUR ON PERSONNE.IDPERSONNE = UTILISATEUR.IDUTILISATEUR JOIN ADMINISTRATEUR ON UTILISATEUR.IDUTILISATEUR = ADMINISTRATEUR.IDADMINISTRATEUR WHERE PERSONNE.IDPERSONNE = ?";
+		Administrateur obj = new Administrateur();
 		try {
 			PreparedStatement stmt = c.prepareStatement(sql);
 
-			stmt.setString(1, obj.getAdresseMail());
-			stmt.setString(2, obj.getMotDePasse());
+			stmt.setInt(1, id);
 
 			ResultSet rs = stmt.executeQuery();
 
@@ -142,6 +161,8 @@ public class AdministrateurDAO extends DAO<Administrateur> {
 				obj.setCodePostal(rs.getString("CODEPOSTAL"));
 				obj.setNumero(rs.getString("NUMERO"));
 				obj.setRue(rs.getString("RUE"));
+				obj.setAdresseMail(rs.getString("ADRESSEMAIL"));
+				obj.setMotDePasse(rs.getString("MOTDEPASSE"));
 				obj.setPoste(rs.getString("POSTE"));
 			}
 		} catch (ParseException ex) {

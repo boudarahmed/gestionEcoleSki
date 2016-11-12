@@ -22,6 +22,10 @@ public class CoursCollectif extends Cours {
 		setTypeCours(typeCours);
 	}
 
+	public CoursCollectif() {
+		super();
+	}
+
 	// GETTERS ET SETTERS
 	public void setSemaine(Semaine semaine) {
 		this.semaine = semaine;

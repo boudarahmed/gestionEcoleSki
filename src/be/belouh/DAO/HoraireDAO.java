@@ -4,11 +4,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import be.belouh.POJO.Horaire;
 
 public class HoraireDAO extends DAO<Horaire> {
+
+	@Override
+	public ArrayList<Integer> compter() {
+		ArrayList<Integer> tab = new ArrayList<Integer>();
+		String sql = "SELECT IDHORAIRE FROM HORAIRE";
+
+		try {
+			Statement stmt = c.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				tab.add(rs.getInt("IDHORAIRE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tab;
+	}
 
 	@Override
 	public boolean supprimer(Horaire obj) {
@@ -75,41 +94,24 @@ public class HoraireDAO extends DAO<Horaire> {
 	}
 
 	@Override
-	public Horaire trouver(Horaire obj) {
-		String sql = "SELECT * FROM HORAIRE WHERE HEUREDEB = ? AND HEUREFIN = ?";
-
+	public Horaire trouver(int id) {
+		String sql = "SELECT * FROM HORAIRE WHERE IDHORAIRE = ?";
+		Horaire obj = new Horaire();
 		try {
 			PreparedStatement stmt = c.prepareStatement(sql);
 
-			stmt.setInt(1, obj.getHeureDeb());
-			stmt.setInt(2, obj.getHeureFin());
+			stmt.setInt(1, id);
 
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
 				obj.setId(rs.getInt("IDHORAIRE"));
+				obj.setHeureDeb(rs.getInt("HEUREDEB"));
+				obj.setHeureFin(rs.getInt("HEUREFIN"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return obj;
-	}
-
-	public HashSet<Horaire> recupererListeHoraire() {
-		HashSet<Horaire> liste = new HashSet<Horaire>();
-		String sql = "SELECT * FROM HORAIRE";
-
-		try {
-			Statement stmt = c.createStatement();
-
-			ResultSet rs = stmt.executeQuery(sql);
-
-			while (rs.next()) {
-				liste.add(new Horaire(rs.getInt("IDHORAIRE"), rs.getInt("HEUREDEB"), rs.getInt("HEUREFIN")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return liste;
 	}
 }

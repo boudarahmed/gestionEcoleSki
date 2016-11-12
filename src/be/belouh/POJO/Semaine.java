@@ -24,6 +24,10 @@ public class Semaine {
 		setCongeScolaire(congeScolaire);
 	}
 
+	public Semaine() {
+
+	}
+
 	// GETTERS ET SETTERS
 	public void setId(int id) {
 		this.id = id;

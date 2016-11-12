@@ -41,6 +41,10 @@ public abstract class Personne {
 		setRue(rue);
 	}
 
+	public Personne() {
+
+	}
+
 	// GETTERS ET SETTERS
 	public void setId(int id) {
 		this.id = id;

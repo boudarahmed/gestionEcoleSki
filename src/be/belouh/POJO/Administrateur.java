@@ -18,6 +18,10 @@ public class Administrateur extends Utilisateur {
 		setPoste(poste);
 	}
 
+	public Administrateur() {
+		super();
+	}
+
 	// GETTERS ET SETTERS
 	public void setPoste(String poste) {
 		this.poste = poste;

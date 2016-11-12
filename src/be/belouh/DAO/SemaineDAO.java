@@ -6,11 +6,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import be.belouh.POJO.Semaine;
 
 public class SemaineDAO extends DAO<Semaine> {
+
+	@Override
+	public ArrayList<Integer> compter() {
+		ArrayList<Integer> tab = new ArrayList<Integer>();
+		String sql = "SELECT IDSEMAINE FROM SEMAINE";
+
+		try {
+			Statement stmt = c.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				tab.add(rs.getInt("IDSEMAINE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tab;
+	}
 
 	@Override
 	public boolean supprimer(Semaine obj) {
@@ -79,46 +98,28 @@ public class SemaineDAO extends DAO<Semaine> {
 	}
 
 	@Override
-	public Semaine trouver(Semaine obj) {
-		String sql = "SELECT * FROM SEMAINE WHERE DATEDEB = ? AND DATEFIN = ?";
+	public Semaine trouver(int id) {
+		String sql = "SELECT * FROM SEMAINE WHERE IDSEMAINE = ?";
+		Semaine obj = new Semaine();
 
 		try {
 			PreparedStatement stmt = c.prepareStatement(sql);
 
-			stmt.setString(1, new SimpleDateFormat("yyyy-MM-dd").format((obj.getDateDeb())));
-			stmt.setString(2, new SimpleDateFormat("yyyy-MM-dd").format((obj.getDateFin())));
+			stmt.setInt(1, id);
 
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
 				obj.setId(rs.getInt("IDSEMAINE"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return obj;
-	}
-
-	public HashSet<Semaine> recupererListeSemaine() {
-		HashSet<Semaine> liste = new HashSet<Semaine>();
-		String sql = "SELECT * FROM SEMAINE";
-
-		try {
-			Statement stmt = c.createStatement();
-
-			ResultSet rs = stmt.executeQuery(sql);
-
-			while (rs.next()) {
-				liste.add(new Semaine(rs.getInt("IDSEMAINE"),
-						new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("DATEDEB")),
-						new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("DATEFIN")),
-						Boolean.parseBoolean(rs.getString("CONGESCOLAIRE"))));
+				obj.setDateDeb(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("DATEDEB")));
+				obj.setDateFin(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("DATEFIN")));
+				obj.setCongeScolaire(Boolean.parseBoolean(rs.getString("CONGESCOLAIRE")));
 			}
 		} catch (ParseException ex) {
 			ex.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return liste;
+		return obj;
 	}
 }

@@ -22,6 +22,10 @@ public abstract class Utilisateur extends Personne {
 		setMotDePasse(motDePasse);
 	}
 
+	public Utilisateur() {
+		super();
+	}
+
 	// GETTERS ET SETTERS
 	public void setAdresseMail(String adresseMail) {
 		this.adresseMail = adresseMail;

@@ -25,6 +25,10 @@ public class Client extends Utilisateur {
 		setListeReservation(listeReservation);
 	}
 
+	public Client() {
+		super();
+	}
+
 	// GETTERS ET SETTERS
 	public void setNumeroCompte(String numeroCompte) {
 		this.numeroCompte = numeroCompte;

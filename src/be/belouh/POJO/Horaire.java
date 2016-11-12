@@ -19,6 +19,10 @@ public class Horaire {
 		setHeureFin(heureFin);
 	}
 
+	public Horaire() {
+
+	}
+
 	// GETTERS ET SETTERS
 	public void setId(int id) {
 		this.id = id;

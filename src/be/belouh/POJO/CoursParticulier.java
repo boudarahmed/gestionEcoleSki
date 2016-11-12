@@ -35,6 +35,10 @@ public class CoursParticulier extends Cours {
 		setAccreditation(accreditation);
 	}
 
+	public CoursParticulier() {
+		super();
+	}
+
 	// GETTERS ET SETTERS
 	public void setDate(Date date) {
 		this.date = date;

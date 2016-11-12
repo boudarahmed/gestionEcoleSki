@@ -28,6 +28,10 @@ public class Eleve extends Personne {
 		setListeCours(listeCours);
 	}
 
+	public Eleve() {
+		super();
+	}
+
 	// GETTERS ET SETTERS
 	public void setAssurance(boolean assurance) {
 		this.assurance = assurance;
