@@ -40,19 +40,27 @@ public class MoniteurDAO extends DAO<Moniteur> {
 		String sqlMoniteur = "DELETE FROM MONITEUR WHERE IDMONITEUR = ?";
 		String sqlUtilisateur = "DELETE FROM UTILISATEUR WHERE IDUTILISATEUR = ?";
 		String sqlPersonne = "DELETE FROM PERSONNE WHERE IDPERSONNE = ?";
+		String sqlLigneAccreditation = "DELETE FROM LIGNEACCREDITATION WHERE IDMONITEUR = ?";
+		String sqlLigneSemaine = "DELETE FROM LIGNESEMAINE WHERE IDMONITEUR = ?";
 
 		try {
 			PreparedStatement stmtMoniteur = c.prepareStatement(sqlMoniteur);
 			PreparedStatement stmtUtil = c.prepareStatement(sqlUtilisateur);
 			PreparedStatement stmtPers = c.prepareStatement(sqlPersonne);
+			PreparedStatement stmtAccreditation = c.prepareStatement(sqlLigneAccreditation);
+			PreparedStatement stmtSemaine = c.prepareStatement(sqlLigneSemaine);
 
 			stmtMoniteur.setInt(1, obj.getId());
 			stmtUtil.setInt(1, obj.getId());
 			stmtPers.setInt(1, obj.getId());
+			stmtAccreditation.setInt(1, obj.getId());
+			stmtSemaine.setInt(1, obj.getId());
 
 			stmtMoniteur.executeUpdate();
 			stmtUtil.executeUpdate();
 			stmtPers.executeUpdate();
+			stmtAccreditation.executeUpdate();
+			stmtSemaine.executeUpdate();
 
 			res = true;
 		} catch (SQLException e) {
@@ -156,15 +164,15 @@ public class MoniteurDAO extends DAO<Moniteur> {
 			while (rs.next()) {
 				listeA.add(accreditationDao.trouver(rs.getInt("IDACCREDITATION")));
 			}
-			listeA.removeAll(obj.getListeAccreditation());
-			Iterator<Accreditation> itAccreditation = listeA.iterator();
+			obj.getListeAccreditation().removeAll(listeA);
+			Iterator<Accreditation> itAccreditation = obj.getListeAccreditation().iterator();
 			while (itAccreditation.hasNext()) {
 				String sqlLigneAccreditation = "INSERT INTO LIGNEACCREDITATION VALUES (?, ?)";
 				try {
 					PreparedStatement stmtLigneAccreditation = c.prepareStatement(sqlLigneAccreditation);
 
 					stmtLigneAccreditation.setInt(1, obj.getId());
-					stmtLigneAccreditation.setInt(1, itAccreditation.next().getId());
+					stmtLigneAccreditation.setInt(2, itAccreditation.next().getId());
 
 					stmtLigneAccreditation.executeUpdate();
 				} catch (SQLException ex) {
@@ -177,15 +185,15 @@ public class MoniteurDAO extends DAO<Moniteur> {
 			while (rs.next()) {
 				listeS.add(semaineDao.trouver(rs.getInt("IDSEMAINE")));
 			}
-			listeS.removeAll(obj.getListeIndisponibilitee());
-			Iterator<Semaine> itSemaine = listeS.iterator();
+			obj.getListeIndisponibilitee().removeAll(listeS);
+			Iterator<Semaine> itSemaine = obj.getListeIndisponibilitee().iterator();
 			while (itSemaine.hasNext()) {
 				String sqlLigneSemaine = "INSERT INTO LIGNESEMAINE VALUES (?, ?)";
 				try {
 					PreparedStatement stmtLigneSemaine = c.prepareStatement(sqlLigneSemaine);
 
 					stmtLigneSemaine.setInt(1, obj.getId());
-					stmtLigneSemaine.setInt(1, itSemaine.next().getId());
+					stmtLigneSemaine.setInt(2, itSemaine.next().getId());
 
 					stmtLigneSemaine.executeUpdate();
 				} catch (SQLException ex) {
@@ -218,8 +226,6 @@ public class MoniteurDAO extends DAO<Moniteur> {
 			PreparedStatement stmtSemaine = c.prepareStatement(sqlSemaine);
 
 			stmt.setInt(1, id);
-			stmtAccreditation.setInt(1, obj.getId());
-			stmtSemaine.setInt(1, obj.getId());
 
 			ResultSet rs = stmt.executeQuery();
 
@@ -236,14 +242,17 @@ public class MoniteurDAO extends DAO<Moniteur> {
 				obj.setAdresseMail(rs.getString("ADRESSEMAIL"));
 				obj.setMotDePasse(rs.getString("MOTDEPASSE"));
 				obj.setSalaireHoraire(rs.getDouble("SALAIREHORAIRE"));
-				obj.setCoursParticulier(Boolean.parseBoolean(rs.getString("CONGESCOLAIRE")));
+				obj.setCoursParticulier(Boolean.parseBoolean(rs.getString("COURSPARTICULIER")));
+				
+				stmtAccreditation.setInt(1, obj.getId());
+				stmtSemaine.setInt(1, obj.getId());
 
 				rs = stmtAccreditation.executeQuery();
 
 				while (rs.next()) {
 					listeA.add(accreditationDao.trouver(rs.getInt("IDACCREDITATION")));
 				}
-
+				
 				obj.setListeAccreditation(listeA);
 
 				rs = stmtSemaine.executeQuery();
@@ -261,5 +270,4 @@ public class MoniteurDAO extends DAO<Moniteur> {
 		}
 		return obj;
 	}
-
 }

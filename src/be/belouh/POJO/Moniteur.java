@@ -81,6 +81,6 @@ public class Moniteur extends Utilisateur {
 	public String toString() {
 		return "Moniteur " + this.getNom() + " " + this.getPrenom() + " né le " + this.getDateNaissance() + "\nDomicile : "
 				+ this.getNumero() + " " + this.getRue() + " " + this.getCodePostal() + " " + this.getVille()
-				+ "\npaye : " + this.getSalaireHoraire() + "/h";
+				+ "\npaye : " + this.getSalaireHoraire() + " euros/h";
 	}
 }
