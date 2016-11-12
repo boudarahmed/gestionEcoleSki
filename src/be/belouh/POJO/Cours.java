@@ -1,6 +1,6 @@
 package be.belouh.POJO;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public abstract class Cours {
 	// STATUT RESERVATION
@@ -12,7 +12,7 @@ public abstract class Cours {
 	protected String statutCours;
 	protected Moniteur moniteur;
 	protected Horaire horaire;
-	protected HashSet<Reservation> listeReservation = new HashSet<Reservation>();
+	protected ArrayList<Reservation> listeReservation = new ArrayList<Reservation>();
 
 	// CONSTRUCTEURS
 	public Cours() {
@@ -52,11 +52,11 @@ public abstract class Cours {
 		return horaire;
 	}
 
-	public void setListeReservation(HashSet<Reservation> listeReservation) {
+	public void setListeReservation(ArrayList<Reservation> listeReservation) {
 		this.listeReservation = listeReservation;
 	}
 
-	public HashSet<Reservation> getListeReservation() {
+	public ArrayList<Reservation> getListeReservation() {
 		return listeReservation;
 	}
 }

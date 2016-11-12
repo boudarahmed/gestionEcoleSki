@@ -51,4 +51,32 @@ public class CoursParticulier extends Cours {
 	public Accreditation getAccreditation() {
 		return accreditation;
 	}
+
+	// REDEFINITION
+	@Override
+	public boolean equals(Object obj) {
+		CoursParticulier c;
+
+		if (obj == null || obj.getClass() != this.getClass())
+			return false;
+		else {
+			c = (CoursParticulier) obj;
+			if (c.getDate().equals(getDate()) && c.getHoraire().equals(getHoraire())
+					&& c.getAccreditation().equals(getAccreditation()))
+				return true;
+			else
+				return false;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getDate().hashCode() + this.getHoraire().hashCode() + this.getAccreditation().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "Cours particulier de " + this.getAccreditation().toString() + " le " + this.getDate() + " de "
+				+ this.getHoraire();
+	}
 }

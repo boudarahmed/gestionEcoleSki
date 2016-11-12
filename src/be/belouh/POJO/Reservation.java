@@ -1,7 +1,7 @@
 package be.belouh.POJO;
 
 import java.util.Date;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class Reservation {
 	// STATUT RESERVATION
@@ -15,7 +15,7 @@ public class Reservation {
 	private double prix;
 	private Client client;
 	private Eleve eleve;
-	private HashSet<Cours> listeCours = new HashSet<Cours>();
+	private ArrayList<Cours> listeCours = new ArrayList<Cours>();
 
 	// CONSTRUCTEURS
 	public Reservation() {
@@ -71,11 +71,40 @@ public class Reservation {
 		return eleve;
 	}
 
-	public void setListeCours(HashSet<Cours> listeCours) {
+	public void setListeCours(ArrayList<Cours> listeCours) {
 		this.listeCours = listeCours;
 	}
 
-	public HashSet<Cours> getListeCours() {
+	public ArrayList<Cours> getListeCours() {
 		return listeCours;
+	}
+
+	// REDEFINITION
+	@Override
+	public boolean equals(Object obj) {
+		Reservation r;
+
+		if (obj == null || obj.getClass() != this.getClass())
+			return false;
+		else {
+			r = (Reservation) obj;
+			if (r.getDateReservation().equals(getDateReservation()) && r.getClient().equals(getClient())
+					&& r.getEleve().equals(getEleve()) && r.getListeCours().equals(getListeCours()))
+				return true;
+			else
+				return false;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getDateReservation().hashCode() + this.getClient().hashCode() + this.getEleve().hashCode()
+				+ this.getListeCours().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "Réservation passée le " + this.getDateReservation() + " par " + this.getClient().toString() + " pour "
+				+ this.getEleve().toString() + " concernant " + this.getListeCours().size() + " cours";
 	}
 }

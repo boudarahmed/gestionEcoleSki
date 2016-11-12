@@ -26,4 +26,31 @@ public class CoursCollectif extends Cours {
 	public TypeCours getTypeCours() {
 		return typeCours;
 	}
+
+	// REDEFINITION
+	@Override
+	public boolean equals(Object obj) {
+		CoursCollectif c;
+
+		if (obj == null || obj.getClass() != this.getClass())
+			return false;
+		else {
+			c = (CoursCollectif) obj;
+			if (c.getHoraire().equals(getHoraire()) && c.getSemaine().equals(getSemaine())
+					&& c.getTypeCours().equals(getTypeCours()))
+				return true;
+			else
+				return false;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getHoraire().hashCode() + this.getSemaine().hashCode() + this.getTypeCours().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return this.getTypeCours().toString() + "\n" + this.getSemaine().toString() + "\n" + this.getHoraire().toString();
+	}
 }

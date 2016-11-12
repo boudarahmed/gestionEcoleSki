@@ -46,4 +46,32 @@ public class Semaine {
 	public boolean getCongeScolaire() {
 		return congeScolaire;
 	}
+
+	// REDEFINITION
+	@Override
+	public boolean equals(Object obj) {
+		Semaine s;
+
+		if (obj == null || obj.getClass() != this.getClass())
+			return false;
+		else {
+			s = (Semaine) obj;
+			if (s.getDateDeb().equals(getDateDeb()) && s.getDateFin().equals(getDateFin())
+					&& s.getCongeScolaire() == getCongeScolaire())
+				return true;
+			else
+				return false;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getDateDeb().hashCode() + this.getDateFin().hashCode()
+				+ Boolean.valueOf(this.getCongeScolaire()).hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "Semaine du " + this.getDateDeb() + " au " + this.getDateFin() + " congé : " + this.getCongeScolaire();
+	}
 }

@@ -35,4 +35,30 @@ public class Horaire {
 	public int getHeureFin() {
 		return heureFin;
 	}
+
+	// REDEFINITION
+	@Override
+	public boolean equals(Object obj) {
+		Horaire h;
+
+		if (obj == null || obj.getClass() != this.getClass())
+			return false;
+		else {
+			h = (Horaire) obj;
+			if (h.getHeureDeb() == getHeureDeb() && h.getHeureFin() == getHeureFin())
+				return true;
+			else
+				return false;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getHeureDeb() + this.getHeureFin();
+	}
+
+	@Override
+	public String toString() {
+		return this.getHeureDeb() + "h à " + this.getHeureFin() + "h";
+	}
 }

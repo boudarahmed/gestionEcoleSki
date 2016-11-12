@@ -1,11 +1,11 @@
 package be.belouh.POJO;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class Client extends Utilisateur {
 	// ATTRIBUTS
 	private String numeroCompte;
-	private HashSet<Reservation> listeReservation = new HashSet<Reservation>();
+	private ArrayList<Reservation> listeReservation = new ArrayList<Reservation>();
 
 	// CONSTRUCTEURS
 	public Client() {
@@ -21,11 +21,44 @@ public class Client extends Utilisateur {
 		return numeroCompte;
 	}
 
-	public void setListeReservation(HashSet<Reservation> listeReservation) {
+	public void setListeReservation(ArrayList<Reservation> listeReservation) {
 		this.listeReservation = listeReservation;
 	}
 
-	public HashSet<Reservation> getListeReservation() {
+	public ArrayList<Reservation> getListeReservation() {
 		return listeReservation;
+	}
+
+	// REDEFINITION
+	@Override
+	public boolean equals(Object obj) {
+		Client c;
+
+		if (obj == null || obj.getClass() != this.getClass())
+			return false;
+		else {
+			c = (Client) obj;
+			if (c.getAdresseMail().equals(getAdresseMail()) && c.getMotDePasse().equals(getMotDePasse()))
+				return true;
+			else
+				return false;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getAdresseMail().hashCode() + this.getMotDePasse().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		if (this.getSexe() == 'M')
+			return "M." + this.getNom() + " " + this.getPrenom() + " né le " + this.getDateNaissance() + "\nDomicile : "
+					+ this.getNumero() + " " + this.getRue() + " " + this.getCodePostal() + " " + this.getVille()
+					+ "\nNuméro de compte : " + this.getNumeroCompte();
+		else
+			return "Mme." + this.getNom() + " " + this.getPrenom() + " né le " + this.getDateNaissance()
+					+ "\nDomicile : " + this.getNumero() + " " + this.getRue() + " " + this.getCodePostal() + " "
+					+ this.getVille() + "\nNuméro de compte : " + this.getNumeroCompte();
 	}
 }

@@ -1,12 +1,12 @@
 package be.belouh.POJO;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class Eleve extends Personne {
 	// ATTRIBUTS
 	private boolean assurance;
-	private HashSet<Reservation> listeReservation = new HashSet<Reservation>();
-	private HashSet<Cours> listeCours = new HashSet<Cours>();
+	private ArrayList<Reservation> listeReservation = new ArrayList<Reservation>();
+	private ArrayList<Cours> listeCours = new ArrayList<Cours>();
 
 	// CONSTRUCTEURS
 	public Eleve() {
@@ -22,19 +22,46 @@ public class Eleve extends Personne {
 		return assurance;
 	}
 
-	public void setListeReservation(HashSet<Reservation> listeReservation) {
+	public void setListeReservation(ArrayList<Reservation> listeReservation) {
 		this.listeReservation = listeReservation;
 	}
 
-	public HashSet<Reservation> getListeReservation() {
+	public ArrayList<Reservation> getListeReservation() {
 		return listeReservation;
 	}
 
-	public void setListeCours(HashSet<Cours> listeCours) {
+	public void setListeCours(ArrayList<Cours> listeCours) {
 		this.listeCours = listeCours;
 	}
 
-	public HashSet<Cours> getListeCours() {
+	public ArrayList<Cours> getListeCours() {
 		return listeCours;
+	}
+
+	// REDEFINITION
+	@Override
+	public boolean equals(Object obj) {
+		Eleve e;
+
+		if (obj == null || obj.getClass() != this.getClass())
+			return false;
+		else {
+			e = (Eleve) obj;
+			if (e.getNom().equals(getNom()) && e.getPrenom().equals(getPrenom())
+					&& e.getDateNaissance().equals(getDateNaissance()))
+				return true;
+			else
+				return false;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getNom().hashCode() + this.getPrenom().hashCode() + this.getDateNaissance().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return this.getNom() + " " + this.getPrenom() + "né(e) le" + this.getDateNaissance();
 	}
 }
