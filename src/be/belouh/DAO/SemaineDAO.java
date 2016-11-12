@@ -99,7 +99,7 @@ public class SemaineDAO extends DAO<Semaine> {
 		return obj;
 	}
 
-	public HashSet<Semaine> recupererListeHoraire() {
+	public HashSet<Semaine> recupererListeSemaine() {
 		HashSet<Semaine> liste = new HashSet<Semaine>();
 		String sql = "SELECT * FROM SEMAINE";
 

@@ -17,6 +17,13 @@ public class Semaine {
 		setCongeScolaire(congeScolaire);
 	}
 
+	public Semaine(Date dateDeb, Date dateFin, boolean congeScolaire) {
+		this.id = 0;
+		setDateDeb(dateDeb);
+		setDateFin(dateFin);
+		setCongeScolaire(congeScolaire);
+	}
+
 	// GETTERS ET SETTERS
 	public void setId(int id) {
 		this.id = id;
