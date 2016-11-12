@@ -12,7 +12,7 @@ public abstract class Cours {
 	protected String statutCours;
 	protected Moniteur moniteur;
 	protected Horaire horaire;
-	protected ArrayList<Reservation> listeReservation = new ArrayList<Reservation>();
+	protected ArrayList<Eleve> listeEleve = new ArrayList<Eleve>();
 
 	// CONSTRUCTEURS
 	public Cours() {
@@ -52,11 +52,11 @@ public abstract class Cours {
 		return horaire;
 	}
 
-	public void setListeReservation(ArrayList<Reservation> listeReservation) {
-		this.listeReservation = listeReservation;
+	public void setListeEleve(ArrayList<Eleve> listeEleve) {
+		this.listeEleve = listeEleve;
 	}
 
-	public ArrayList<Reservation> getListeReservation() {
-		return listeReservation;
+	public ArrayList<Eleve> getListeEleve() {
+		return listeEleve;
 	}
 }

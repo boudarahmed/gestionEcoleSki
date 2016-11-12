@@ -6,7 +6,6 @@ public class Eleve extends Personne {
 	// ATTRIBUTS
 	private boolean assurance;
 	private ArrayList<Reservation> listeReservation = new ArrayList<Reservation>();
-	private ArrayList<Cours> listeCours = new ArrayList<Cours>();
 
 	// CONSTRUCTEURS
 	public Eleve() {
@@ -28,14 +27,6 @@ public class Eleve extends Personne {
 
 	public ArrayList<Reservation> getListeReservation() {
 		return listeReservation;
-	}
-
-	public void setListeCours(ArrayList<Cours> listeCours) {
-		this.listeCours = listeCours;
-	}
-
-	public ArrayList<Cours> getListeCours() {
-		return listeCours;
 	}
 
 	// REDEFINITION
