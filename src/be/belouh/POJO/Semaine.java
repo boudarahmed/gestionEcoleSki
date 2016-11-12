@@ -10,20 +10,6 @@ public class Semaine {
 	private boolean congeScolaire;
 
 	// CONSTRUCTEURS
-	public Semaine(int id, Date dateDeb, Date dateFin, boolean congeScolaire) {
-		this.id = id;
-		setDateDeb(dateDeb);
-		setDateFin(dateFin);
-		setCongeScolaire(congeScolaire);
-	}
-
-	public Semaine(Date dateDeb, Date dateFin, boolean congeScolaire) {
-		this.id = 0;
-		setDateDeb(dateDeb);
-		setDateFin(dateFin);
-		setCongeScolaire(congeScolaire);
-	}
-
 	public Semaine() {
 
 	}

@@ -1,7 +1,6 @@
 package be.belouh.POJO;
 
 import java.util.Date;
-import java.util.HashSet;
 
 public class CoursParticulier extends Cours {
 	// STATUT RESERVATION
@@ -16,25 +15,6 @@ public class CoursParticulier extends Cours {
 	private Accreditation accreditation;
 
 	// CONSTRUCTEURS
-	public CoursParticulier(int id, String statutCours, Moniteur moniteur, Horaire horaire,
-			HashSet<Reservation> listeReservation, Date date, boolean congeScolaire, double prix,
-			Accreditation accreditation) {
-		super(id, statutCours, moniteur, horaire, listeReservation);
-		setDate(date);
-		setCongeScolaire(congeScolaire);
-		setPrix(prix);
-		setAccreditation(accreditation);
-	}
-
-	public CoursParticulier(String statutCours, Moniteur moniteur, Horaire horaire,
-			HashSet<Reservation> listeReservation) {
-		super(statutCours, moniteur, horaire, listeReservation);
-		setDate(date);
-		setCongeScolaire(congeScolaire);
-		setPrix(prix);
-		setAccreditation(accreditation);
-	}
-
 	public CoursParticulier() {
 		super();
 	}

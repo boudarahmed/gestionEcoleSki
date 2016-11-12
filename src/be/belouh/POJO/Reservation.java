@@ -18,28 +18,6 @@ public class Reservation {
 	private HashSet<Cours> listeCours = new HashSet<Cours>();
 
 	// CONSTRUCTEURS
-	public Reservation(int id, Date dateReservation, String statutReservation, double prix, Client client, Eleve eleve,
-			HashSet<Cours> listeCours) {
-		this.id = id;
-		setDateReservation(dateReservation);
-		setStatutReservation(statutReservation);
-		setPrix(prix);
-		setClient(client);
-		setEleve(eleve);
-		setListeCours(listeCours);
-	}
-
-	public Reservation(Date dateReservation, String statutReservation, double prix, Client client, Eleve eleve,
-			HashSet<Cours> listeCours) {
-		this.id = 0;
-		setDateReservation(dateReservation);
-		setStatutReservation(statutReservation);
-		setPrix(prix);
-		setClient(client);
-		setEleve(eleve);
-		setListeCours(listeCours);
-	}
-
 	public Reservation() {
 
 	}

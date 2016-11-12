@@ -7,18 +7,6 @@ public class Horaire {
 	private int heureFin;
 
 	// CONSTRUCTEURS
-	public Horaire(int id, int heureDeb, int heureFin) {
-		this.id = id;
-		setHeureDeb(heureDeb);
-		setHeureFin(heureFin);
-	}
-
-	public Horaire(int heureDeb, int heureFin) {
-		this.id = 0;
-		setHeureDeb(heureDeb);
-		setHeureFin(heureFin);
-	}
-
 	public Horaire() {
 
 	}

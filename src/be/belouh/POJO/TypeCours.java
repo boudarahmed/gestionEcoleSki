@@ -10,24 +10,6 @@ public class TypeCours {
 	private Accreditation accreditation;
 
 	// CONSTRUCTEURS
-	public TypeCours(int id, String niveau, int minEleve, int maxEleve, double prix, Accreditation accreditation) {
-		this.id = id;
-		setNiveau(niveau);
-		setMinEleve(minEleve);
-		setMaxEleve(maxEleve);
-		setPrix(prix);
-		setAccreditation(accreditation);
-	}
-
-	public TypeCours(String niveau, int minEleve, int maxEleve, double prix, Accreditation accreditation) {
-		this.id = 0;
-		setNiveau(niveau);
-		setMinEleve(minEleve);
-		setMaxEleve(maxEleve);
-		setPrix(prix);
-		setAccreditation(accreditation);
-	}
-
 	public TypeCours() {
 
 	}

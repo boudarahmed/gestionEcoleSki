@@ -15,23 +15,6 @@ public abstract class Cours {
 	protected HashSet<Reservation> listeReservation = new HashSet<Reservation>();
 
 	// CONSTRUCTEURS
-	public Cours(int id, String statutCours, Moniteur moniteur, Horaire horaire,
-			HashSet<Reservation> listeReservation) {
-		this.id = id;
-		setStatutCours(statutCours);
-		setMoniteur(moniteur);
-		setHoraire(horaire);
-		setListeReservation(listeReservation);
-	}
-
-	public Cours(String statutCours, Moniteur moniteur, Horaire horaire, HashSet<Reservation> listeReservation) {
-		this.id = 0;
-		setStatutCours(statutCours);
-		setMoniteur(moniteur);
-		setHoraire(horaire);
-		setListeReservation(listeReservation);
-	}
-
 	public Cours() {
 
 	}

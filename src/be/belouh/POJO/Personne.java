@@ -15,32 +15,6 @@ public abstract class Personne {
 	protected String rue;
 
 	// CONSTRUCTEURS
-	public Personne(int id, String nom, String prenom, Date dateNaissance, char sexe, String ville, String codePostal,
-			String numero, String rue) {
-		this.id = id;
-		setNom(nom);
-		setPrenom(prenom);
-		setDateNaissance(dateNaissance);
-		setSexe(sexe);
-		setVille(ville);
-		setCodePostal(codePostal);
-		setNumero(numero);
-		setRue(rue);
-	}
-
-	public Personne(String nom, String prenom, Date dateNaissance, char sexe, String ville, String codePostal,
-			String numero, String rue) {
-		this.id = 0;
-		setNom(nom);
-		setPrenom(prenom);
-		setDateNaissance(dateNaissance);
-		setSexe(sexe);
-		setVille(ville);
-		setCodePostal(codePostal);
-		setNumero(numero);
-		setRue(rue);
-	}
-
 	public Personne() {
 
 	}

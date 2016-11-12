@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import be.belouh.POJO.Accreditation;
 import be.belouh.POJO.TypeCours;
 
 public class TypeCoursDAO extends DAO<TypeCours> {
@@ -101,8 +102,9 @@ public class TypeCoursDAO extends DAO<TypeCours> {
 
 	@Override
 	public TypeCours trouver(int id) {
-		String sql = "SELECT TYPECOURS.IDTYPECOURS, TYPECOURS.NIVEAU, TYPECOURS.MINELEVE, TYPECOURS.MAXELEVE, TYPECOURS.IDACCREDITATION, ACCREDITATION.SPORT, ACCREDITATION.AGEMIN, ACCREDITATION.AGEMAX FROM TYPECOURS JOIN ACCREDITATION ON TYPECOURS.IDACCREDITATION = ACCREDITATION.IDACCREDITATION WHERE TYPECOURS.IDTYPECOURS = ?";
+		String sql = "SELECT TYPECOURS.IDTYPECOURS, TYPECOURS.NIVEAU, TYPECOURS.MINELEVE, TYPECOURS.MAXELEVE, TYPECOURS.PRIX, TYPECOURS.IDACCREDITATION, ACCREDITATION.SPORT, ACCREDITATION.AGEMIN, ACCREDITATION.AGEMAX FROM TYPECOURS JOIN ACCREDITATION ON TYPECOURS.IDACCREDITATION = ACCREDITATION.IDACCREDITATION WHERE TYPECOURS.IDTYPECOURS = ?";
 		TypeCours obj = new TypeCours();
+		obj.setAccreditation(new Accreditation());
 		try {
 			PreparedStatement stmt = c.prepareStatement(sql);
 
@@ -126,5 +128,4 @@ public class TypeCoursDAO extends DAO<TypeCours> {
 		}
 		return obj;
 	}
-
 }

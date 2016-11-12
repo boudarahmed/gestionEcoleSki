@@ -8,20 +8,6 @@ public class Accreditation {
 	private int ageMax;
 
 	// CONSTRUCTEURS
-	public Accreditation(int id, String sport, int ageMin, int ageMax) {
-		this.id = id;
-		setSport(sport);
-		setAgeMin(ageMin);
-		setAgeMax(ageMax);
-	}
-
-	public Accreditation(String sport, int ageMin, int ageMax) {
-		this.id = 0;
-		setSport(sport);
-		setAgeMin(ageMin);
-		setAgeMax(ageMax);
-	}
-
 	public Accreditation() {
 
 	}
