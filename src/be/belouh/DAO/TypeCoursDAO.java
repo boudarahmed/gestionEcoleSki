@@ -102,9 +102,11 @@ public class TypeCoursDAO extends DAO<TypeCours> {
 
 	@Override
 	public TypeCours trouver(int id) {
-		String sql = "SELECT TYPECOURS.IDTYPECOURS, TYPECOURS.NIVEAU, TYPECOURS.MINELEVE, TYPECOURS.MAXELEVE, TYPECOURS.PRIX, TYPECOURS.IDACCREDITATION, ACCREDITATION.SPORT, ACCREDITATION.AGEMIN, ACCREDITATION.AGEMAX FROM TYPECOURS JOIN ACCREDITATION ON TYPECOURS.IDACCREDITATION = ACCREDITATION.IDACCREDITATION WHERE TYPECOURS.IDTYPECOURS = ?";
+		DAO<Accreditation> a = new AccreditationDAO();
+
+		String sql = "SELECT * FROM TYPECOURS WHERE IDTYPECOURS = ?";
+
 		TypeCours obj = new TypeCours();
-		obj.setAccreditation(new Accreditation());
 		try {
 			PreparedStatement stmt = c.prepareStatement(sql);
 
@@ -118,10 +120,7 @@ public class TypeCoursDAO extends DAO<TypeCours> {
 				obj.setMinEleve(rs.getInt("MINELEVE"));
 				obj.setMaxEleve(rs.getInt("MAXELEVE"));
 				obj.setPrix(rs.getDouble("PRIX"));
-				obj.getAccreditation().setId(rs.getInt("IDACCREDITATION"));
-				obj.getAccreditation().setSport(rs.getString("SPORT"));
-				obj.getAccreditation().setAgeMin(rs.getInt("AGEMIN"));
-				obj.getAccreditation().setAgeMax(rs.getInt("AGEMAX"));
+				obj.setAccreditation(a.trouver(rs.getInt("IDACCREDITATION")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
