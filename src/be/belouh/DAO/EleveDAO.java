@@ -130,9 +130,9 @@ public class EleveDAO extends DAO<Eleve> {
 	@Override
 	public Eleve trouver(int id) {
 		DAO<Client> cl = new ClientDAO();
-		
+
 		String sql = "SELECT PERSONNE.IDPERSONNE, PERSONNE.NOM, PERSONNE.PRENOM, PERSONNE.DATENAISSANCE, PERSONNE.SEXE, PERSONNE.VILLE, PERSONNE.CODEPOSTAL, PERSONNE.NUMERO, PERSONNE.RUE, ELEVE.ASSURANCE, ELEVE.IDCLIENT FROM PERSONNE JOIN ELEVE ON PERSONNE.IDPERSONNE = ELEVE.IDELEVE WHERE PERSONNE.IDPERSONNE = ?";
-		
+
 		Eleve obj = new Eleve();
 		try {
 			PreparedStatement stmt = c.prepareStatement(sql);
@@ -161,5 +161,4 @@ public class EleveDAO extends DAO<Eleve> {
 		}
 		return obj;
 	}
-
 }
