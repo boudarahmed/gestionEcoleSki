@@ -172,5 +172,4 @@ public class ClientDAO extends DAO<Client> {
 		}
 		return obj;
 	}
-
 }
