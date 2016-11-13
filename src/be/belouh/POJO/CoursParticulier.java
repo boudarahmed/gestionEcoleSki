@@ -76,7 +76,7 @@ public class CoursParticulier extends Cours {
 
 	@Override
 	public String toString() {
-		return "Cours particulier de " + this.getAccreditation().toString() + " le " + this.getDate() + " de "
+		return "Cours particulier de " + this.getAccreditation().toString() + " ans le " + this.getDate() + " de "
 				+ this.getHoraire();
 	}
 }

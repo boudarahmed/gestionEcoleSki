@@ -156,5 +156,4 @@ public class CoursParticulierDAO extends DAO<CoursParticulier> {
 		}
 		return obj;
 	}
-
 }
