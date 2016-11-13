@@ -124,9 +124,9 @@ public class CoursCollectifDAO extends DAO<CoursCollectif> {
 		DAO<Horaire> h = new HoraireDAO();
 		DAO<Semaine> s = new SemaineDAO();
 		DAO<TypeCours> t = new TypeCoursDAO();
-		
+
 		String sql = "SELECT COURS.IDCOURS, COURS.STATUTCOURS, COURS.IDMONITEUR, COURS.IDHORAIRE, COURSCOLLECTIF.IDSEMAINE, COURSCOLLECTIF.IDTYPECOURS FROM COURS JOIN COURSCOLLECTIF ON COURS.IDCOURS = COURSCOLLECTIF.IDCOURSCOLLECTIF WHERE COURS.IDCOURS = ?";
-		
+
 		CoursCollectif obj = new CoursCollectif();
 		try {
 			PreparedStatement stmt = c.prepareStatement(sql);
@@ -148,5 +148,4 @@ public class CoursCollectifDAO extends DAO<CoursCollectif> {
 		}
 		return obj;
 	}
-
 }
