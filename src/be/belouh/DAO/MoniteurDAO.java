@@ -164,8 +164,9 @@ public class MoniteurDAO extends DAO<Moniteur> {
 			while (rs.next()) {
 				listeA.add(accreditationDao.trouver(rs.getInt("IDACCREDITATION")));
 			}
-			obj.getListeAccreditation().removeAll(listeA);
-			Iterator<Accreditation> itAccreditation = obj.getListeAccreditation().iterator();
+			ArrayList<Accreditation> listeTempA = new ArrayList<Accreditation>(obj.getListeAccreditation());
+			listeTempA.removeAll(listeA);
+			Iterator<Accreditation> itAccreditation = listeTempA.iterator();
 			while (itAccreditation.hasNext()) {
 				String sqlLigneAccreditation = "INSERT INTO LIGNEACCREDITATION VALUES (?, ?)";
 				try {
@@ -185,8 +186,9 @@ public class MoniteurDAO extends DAO<Moniteur> {
 			while (rs.next()) {
 				listeS.add(semaineDao.trouver(rs.getInt("IDSEMAINE")));
 			}
-			obj.getListeIndisponibilitee().removeAll(listeS);
-			Iterator<Semaine> itSemaine = obj.getListeIndisponibilitee().iterator();
+			ArrayList<Semaine> listeTempS = new ArrayList<Semaine>(obj.getListeIndisponibilitee());
+			listeTempS.removeAll(listeS);
+			Iterator<Semaine> itSemaine = listeTempS.iterator();
 			while (itSemaine.hasNext()) {
 				String sqlLigneSemaine = "INSERT INTO LIGNESEMAINE VALUES (?, ?)";
 				try {

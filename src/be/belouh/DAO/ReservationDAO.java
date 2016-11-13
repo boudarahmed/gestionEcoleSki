@@ -122,8 +122,11 @@ public class ReservationDAO extends DAO<Reservation> {
 				else
 					listeC.add(cp.trouver(idcours));
 			}
-			obj.getListeCours().removeAll(listeC);
-			Iterator<Cours> itCours = obj.getListeCours().iterator();
+			
+			ArrayList<Cours> listetemp = new ArrayList<Cours>(obj.getListeCours());
+			
+			listetemp.removeAll(listeC);
+			Iterator<Cours> itCours = listetemp.iterator();
 			while (itCours.hasNext()) {
 				String sqlLigneReservation = "INSERT INTO LIGNERESERVATION VALUES (?, ?)";
 				try {
@@ -152,7 +155,7 @@ public class ReservationDAO extends DAO<Reservation> {
 		
 		ArrayList<Cours> listeC = new ArrayList<Cours>();
 
-		String sqlReservation = "SELECT * WHERE IDRESERVATION = ?";
+		String sqlReservation = "SELECT * FROM RESERVATION WHERE IDRESERVATION = ?";
 		String sqlCours = "SELECT COURS.IDCOURS FROM LIGNERESERVATION JOIN COURS ON LIGNERESERVATION.IDCOURS = COURS.IDCOURS WHERE LIGNERESERVATION.IDRESERVATION = ?";
 
 		Reservation obj = new Reservation();
@@ -194,5 +197,4 @@ public class ReservationDAO extends DAO<Reservation> {
 		}
 		return obj;
 	}
-
 }
