@@ -6,6 +6,7 @@ public class Client extends Utilisateur {
 	// ATTRIBUTS
 	private String numeroCompte;
 	private ArrayList<Reservation> listeReservation = new ArrayList<Reservation>();
+	private ArrayList<Eleve> listeEleve = new ArrayList<Eleve>();
 
 	// CONSTRUCTEURS
 	public Client() {
@@ -27,6 +28,14 @@ public class Client extends Utilisateur {
 
 	public ArrayList<Reservation> getListeReservation() {
 		return listeReservation;
+	}
+
+	public void setListeEleve(ArrayList<Eleve> listeEleve) {
+		this.listeEleve = listeEleve;
+	}
+
+	public ArrayList<Eleve> getListeEleve() {
+		return listeEleve;
 	}
 
 	// REDEFINITION

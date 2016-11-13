@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Eleve extends Personne {
 	// ATTRIBUTS
 	private boolean assurance;
+	private Client client;
 	private ArrayList<Reservation> listeReservation = new ArrayList<Reservation>();
 
 	// CONSTRUCTEURS
@@ -19,6 +20,14 @@ public class Eleve extends Personne {
 
 	public boolean getAssurance() {
 		return assurance;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Client getClient() {
+		return client;
 	}
 
 	public void setListeReservation(ArrayList<Reservation> listeReservation) {
