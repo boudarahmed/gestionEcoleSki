@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import be.belouh.DAO.DAO;
 import be.belouh.DAO.MoniteurDAO;
+import be.belouh.POJO.Cours;
 import be.belouh.POJO.Moniteur;
 
 public class ListeMoniteurS {
@@ -13,12 +14,25 @@ public class ListeMoniteurS {
 	private static ListeMoniteurS instance = null;
 
 	private ListeMoniteurS() {
+		//On récupere tous les moniteurs de la base de données et on rempli leur liste de cours grace au singleton liste de cours
 		DAO<Moniteur> m = new MoniteurDAO();
 		ArrayList<Integer> id = m.compter();
+		ListeCoursS listeCours = ListeCoursS.getInstance();
 		Iterator<Integer> it = id.iterator();
+		Iterator<Moniteur> itM;
 
 		while (it.hasNext())
 			liste.add(m.trouver(it.next()));
+		
+		itM = liste.iterator();
+		while(itM.hasNext()){
+			Moniteur moniteur = itM.next();
+			for (Cours cours : listeCours.getListe()) {
+				if(cours.getMoniteur().equals(moniteur))
+					moniteur.getListeCours().add(cours);
+			}
+		}
+			
 	}
 
 	public static ListeMoniteurS getInstance() {
