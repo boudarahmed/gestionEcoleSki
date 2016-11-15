@@ -1,15 +1,16 @@
 package be.belouh.Vue;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class Fenetre extends JFrame {
@@ -18,28 +19,30 @@ public class Fenetre extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel panel = new JPanel();
-	private JPanel panelConnexion = new JPanel();
-	private GridBagLayout layoutConnexion = new GridBagLayout();
-	private GridBagConstraints gbcConnexion = new GridBagConstraints();
-	private JTextField textFieldAdresseMail = new JTextField(20);
-	private JPasswordField passwordFieldMotDePasse = new JPasswordField(20);
+	private JPanel panel = new JPanel(null);
+
+	// COMPOSANTS DE L'ECRAN DE CONNEXION
+	private JPanel panelConnexion = new JPanel(null);
+	private JLabel labelAdresseMail = new JLabel("Adresse e-mail:");
+	private JTextField textFieldAdresseMail = new JTextField();
+	private JLabel labelMotDePasse = new JLabel("Mot de passe:");
+	private JPasswordField passwordFieldMotDePasse = new JPasswordField();
+	private JRadioButton radioClient = new JRadioButton("Client", true);
+	private JRadioButton radioMoniteur = new JRadioButton("Moniteur");
+	private JRadioButton radioAdministrateur = new JRadioButton("Administrateur");
+	private ButtonGroup buttonGroupUtilisateur = new ButtonGroup();
+	private JLabel labelInscriptionClient = new JLabel("S'inscrire");
 	private JButton buttonConnexion = new JButton("Connexion");
 
 	public Fenetre() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(800, 600);
-		this.setLocationRelativeTo(null);
-		this.panelConnexion.setLayout(layoutConnexion);
-		
-		gbcConnexion.insets = new Insets(5, 5, 5, 5);
-		this.panelConnexion.setLayout(new GridBagLayout());
-		this.panelConnexion.add(textFieldAdresseMail);
-		this.panelConnexion.add(passwordFieldMotDePasse);
-		this.panelConnexion.add(buttonConnexion);
-		this.panel.add(panelConnexion);
-		this.setContentPane(panel);
-		this.setVisible(true);
+		panel.setOpaque(true);
+		setContentPane(panel);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(800, 600);
+		setLocationRelativeTo(null);
+		setResizable(false);
+		setTitle("Gestion école ski");
+		setVisible(true);
 	}
 
 	public String getAdresseMail() {
@@ -49,15 +52,72 @@ public class Fenetre extends JFrame {
 	public String getMotDePasse() {
 		return String.valueOf(passwordFieldMotDePasse.getPassword());
 	}
-	public void videEcran(){
+	
+	public String getRadioUtilisateur(){
+		if(radioClient.isSelected())
+			return radioClient.getText();
+		else if(radioMoniteur.isSelected())
+			return radioMoniteur.getText();
+		else
+			return radioAdministrateur.getText();
+	}
+
+	public void AfficheEcranConnexion() {
+		panelConnexion.setSize(400, 300);
+		panelConnexion.setLocation(200, 125);
+
+		labelAdresseMail.setSize(360, 25);
+		labelAdresseMail.setLocation(20, 30);
+		textFieldAdresseMail.setSize(360, 40);
+		textFieldAdresseMail.setLocation(20, 60);
+		labelMotDePasse.setSize(360, 25);
+		labelMotDePasse.setLocation(20, 110);
+		passwordFieldMotDePasse.setSize(360, 40);
+		passwordFieldMotDePasse.setLocation(20, 140);
+
+		radioClient.setSize(60, 20);
+		radioClient.setLocation(20, 200);
+		radioMoniteur.setSize(80, 20);
+		radioMoniteur.setLocation(85, 200);
+		radioAdministrateur.setSize(110, 20);
+		radioAdministrateur.setLocation(170, 200);
+		buttonGroupUtilisateur.add(radioClient);
+		buttonGroupUtilisateur.add(radioMoniteur);
+		buttonGroupUtilisateur.add(radioAdministrateur);
+
+		labelInscriptionClient.setForeground(Color.BLUE);
+		labelInscriptionClient.setSize(60, 20);
+		labelInscriptionClient.setLocation(20, 260);
+
+		buttonConnexion.setSize(120, 40);
+		buttonConnexion.setLocation(260, 240);
+
+		panelConnexion.add(labelAdresseMail);
+		panelConnexion.add(textFieldAdresseMail);
+		panelConnexion.add(labelMotDePasse);
+		panelConnexion.add(passwordFieldMotDePasse);
+		panelConnexion.add(radioClient);
+		panelConnexion.add(radioMoniteur);
+		panelConnexion.add(radioAdministrateur);
+		panelConnexion.add(labelInscriptionClient);
+		panelConnexion.add(buttonConnexion);
+		panel.add(panelConnexion);
+	}
+
+	public void videEcran() {
 		panel.removeAll();
 		panel.updateUI();
 	}
-	public void afficheErreurConnexion(){
-		JOptionPane.showMessageDialog(this, "Echec de la connexion");
+
+	public void affiche(String error) {
+		JOptionPane.showMessageDialog(this, error);
 	}
-	
+
 	public void addbuttonConnexionListener(ActionListener ButtonConnexionlistener) {
 		buttonConnexion.addActionListener(ButtonConnexionlistener);
+	}
+
+	public void addlabelInscriptionClientListener(ActionListener LabelInscriptionListener) {
+
 	}
 }
