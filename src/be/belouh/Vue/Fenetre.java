@@ -31,7 +31,7 @@ public class Fenetre extends JFrame {
 	private JRadioButton radioMoniteur = new JRadioButton("Moniteur");
 	private JRadioButton radioAdministrateur = new JRadioButton("Administrateur");
 	private ButtonGroup buttonGroupUtilisateur = new ButtonGroup();
-	private JLabel labelInscriptionClient = new JLabel("S'inscrire");
+	private JButton buttonInscriptionClient = new JButton("S'inscrire");
 	private JButton buttonConnexion = new JButton("Connexion");
 
 	public Fenetre() {
@@ -85,9 +85,11 @@ public class Fenetre extends JFrame {
 		buttonGroupUtilisateur.add(radioMoniteur);
 		buttonGroupUtilisateur.add(radioAdministrateur);
 
-		labelInscriptionClient.setForeground(Color.BLUE);
-		labelInscriptionClient.setSize(60, 20);
-		labelInscriptionClient.setLocation(20, 260);
+		buttonInscriptionClient.setForeground(Color.BLUE);
+		buttonInscriptionClient.setBorderPainted(false);
+		buttonInscriptionClient.setContentAreaFilled(false);
+		buttonInscriptionClient.setSize(90, 20);
+		buttonInscriptionClient.setLocation(5, 260);
 
 		buttonConnexion.setSize(120, 40);
 		buttonConnexion.setLocation(260, 240);
@@ -99,7 +101,7 @@ public class Fenetre extends JFrame {
 		panelConnexion.add(radioClient);
 		panelConnexion.add(radioMoniteur);
 		panelConnexion.add(radioAdministrateur);
-		panelConnexion.add(labelInscriptionClient);
+		panelConnexion.add(buttonInscriptionClient);
 		panelConnexion.add(buttonConnexion);
 		panel.add(panelConnexion);
 	}
@@ -117,7 +119,7 @@ public class Fenetre extends JFrame {
 		buttonConnexion.addActionListener(ButtonConnexionlistener);
 	}
 
-	public void addlabelInscriptionClientListener(ActionListener LabelInscriptionListener) {
-
+	public void addbuttonInscriptionClientListener(ActionListener ButtonInscriptionListener) {
+		buttonInscriptionClient.addActionListener(ButtonInscriptionListener);
 	}
 }

@@ -11,14 +11,15 @@ import be.belouh.Vue.Fenetre;
 public class Controlleur {
 	private Fenetre vue;
 	private UtilisateurM modele;
-	
-	public Controlleur(Fenetre vue) {
-		this.vue = vue;
-		this.vue.AfficheEcranConnexion();
-		this.vue.addbuttonConnexionListener(new ButtonConnexionlistener());
+
+	public Controlleur(Fenetre _vue) {
+		vue = _vue;
+		vue.AfficheEcranConnexion();
+		vue.addbuttonConnexionListener(new ButtonConnexionlistener());
+		vue.addbuttonInscriptionClientListener(new ButtonInscriptionListener());
 	}
-	
-	class ButtonConnexionlistener implements ActionListener{
+
+	class ButtonConnexionlistener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -27,7 +28,7 @@ public class Controlleur {
 				modele = new ClientM();
 				modele.getUtilisateur().setAdresseMail(vue.getAdresseMail());
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
-				if(modele.connexion())
+				if (modele.connexion())
 					vue.affiche("Connexion réussie voici votre id : " + modele.getUtilisateur().getId());
 				else
 					vue.affiche("échec connexion");
@@ -36,7 +37,7 @@ public class Controlleur {
 				modele = new MoniteurM();
 				modele.getUtilisateur().setAdresseMail(vue.getAdresseMail());
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
-				if(modele.connexion())
+				if (modele.connexion())
 					vue.affiche("Connexion réussie voici votre id : " + modele.getUtilisateur().getId());
 				else
 					vue.affiche("échec connexion");
@@ -45,7 +46,7 @@ public class Controlleur {
 				modele = new AdministrateurM();
 				modele.getUtilisateur().setAdresseMail(vue.getAdresseMail());
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
-				if(modele.connexion())
+				if (modele.connexion())
 					vue.affiche("Connexion réussie voici votre id : " + modele.getUtilisateur().getId());
 				else
 					vue.affiche("échec connexion");
@@ -54,6 +55,16 @@ public class Controlleur {
 				break;
 			}
 		}
-		
+
+	}
+
+	class ButtonInscriptionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			vue.affiche("Direction l'inscription");
+
+		}
+
 	}
 }
