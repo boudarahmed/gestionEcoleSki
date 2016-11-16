@@ -9,6 +9,7 @@ import be.belouh.Modele.AdministrateurM;
 import be.belouh.Modele.ClientM;
 import be.belouh.Modele.MoniteurM;
 import be.belouh.Modele.UtilisateurM;
+import be.belouh.Singleton.ListeSemaineS;
 import be.belouh.Vue.Fenetre;
 
 public class Controlleur {
@@ -88,7 +89,7 @@ public class Controlleur {
 				if (modele.connexion()){
 					vue.videChampConnexion();
 					vue.videEcran();
-					vue.affiche("Connexion réussie");
+					vue.afficheEcranMoniteur(ListeSemaineS.getInstance().getListe());
 				}
 				else
 					vue.affiche("échec connexion");

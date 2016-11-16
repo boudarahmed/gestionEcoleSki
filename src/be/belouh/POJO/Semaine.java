@@ -1,5 +1,6 @@
 package be.belouh.POJO;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Semaine {
@@ -72,6 +73,6 @@ public class Semaine {
 
 	@Override
 	public String toString() {
-		return "Semaine du " + this.getDateDeb() + " au " + this.getDateFin() + " congé : " + this.getCongeScolaire();
+		return "du " +  new SimpleDateFormat("dd-MM-yy").format(this.getDateDeb()) + " au " + new SimpleDateFormat("dd-MM-yy").format(this.getDateFin());
 	}
 }

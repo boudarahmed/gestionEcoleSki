@@ -2,18 +2,24 @@ package be.belouh.Vue;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
+import be.belouh.POJO.Semaine;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -71,6 +77,16 @@ public class Fenetre extends JFrame {
 	private JTextField textFieldInscriptionNumeroCompte = new JTextField();
 	private JButton buttonInscriptionValidation = new JButton("Valider");
 	private JButton buttonInscriptionAnnulation = new JButton("Annuler");
+	
+	// COMPOSANTS DE L'ECRAN MONITEUR
+	private JPanel panelMoniteur = new JPanel(null);
+	private JScrollPane scrollPaneCoursMoniteur;
+	private JTable tableauCoursMoniteur;
+	private DefaultTableModel tableauCoursMoniteurModele;
+	private JComboBox<Semaine> comboSemaineCoursMoniteur = new JComboBox<Semaine>();
+	private JRadioButton radioCoursCollectifMoniteur = new JRadioButton("Cours collectif", true);
+	private JRadioButton radioCoursParticulierMoniteur = new JRadioButton("Cours particulier");
+	private ButtonGroup buttonGroupCoursMoniteur = new ButtonGroup();
 
 	public Fenetre() {
 		panel.setOpaque(true);
@@ -319,6 +335,39 @@ public class Fenetre extends JFrame {
 		passwordFieldInscriptionMotDePasse.setText("");
 		passwordFieldInscriptionConfirmMotDePasse.setText("");
 		textFieldInscriptionNumeroCompte.setText("");
+	}
+	
+	// METHODES D'AFFICHAGE DE L'ECRAN MONITEUR
+	public void afficheEcranMoniteur(ArrayList<Semaine> listSemaine){
+		panelMoniteur.setSize(800, 600);
+		panelMoniteur.setLocation(0, 0);
+		
+		comboSemaineCoursMoniteur.setSize(175, 30);
+		comboSemaineCoursMoniteur.setLocation(10, 25);
+		
+		for (Semaine semaine : listSemaine) {
+			comboSemaineCoursMoniteur.addItem(semaine);
+		}
+		
+		radioCoursCollectifMoniteur.setSize(150, 25);
+		radioCoursCollectifMoniteur.setLocation(10, 75);
+		radioCoursParticulierMoniteur.setSize(150, 25);
+		radioCoursParticulierMoniteur.setLocation(10, 110);
+		buttonGroupCoursMoniteur.add(radioCoursCollectifMoniteur);
+		buttonGroupCoursMoniteur.add(radioCoursParticulierMoniteur);
+		tableauCoursMoniteurModele = new DefaultTableModel();
+		tableauCoursMoniteur = new JTable(tableauCoursMoniteurModele);
+		tableauCoursMoniteur.setRowHeight(25);
+		scrollPaneCoursMoniteur = new JScrollPane(tableauCoursMoniteur);
+		scrollPaneCoursMoniteur.setSize(600, 600);
+		scrollPaneCoursMoniteur.setLocation(196, 0);
+		
+		panelMoniteur.add(radioCoursParticulierMoniteur);
+		panelMoniteur.add(radioCoursCollectifMoniteur);
+		panelMoniteur.add(comboSemaineCoursMoniteur);
+		panelMoniteur.add(scrollPaneCoursMoniteur);
+		
+		panel.add(panelMoniteur);
 	}
 
 	// LISTENER DE L'ECRAN DE CONNEXION
