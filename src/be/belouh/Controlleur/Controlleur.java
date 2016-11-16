@@ -75,7 +75,7 @@ public class Controlleur {
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
 				if (modele.connexion()){
 					vue.videChampConnexion();
-					// vue.videEcran();
+					vue.videEcran();
 					vue.affiche("Connexion réussie");
 				}
 				else
@@ -87,7 +87,7 @@ public class Controlleur {
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
 				if (modele.connexion()){
 					vue.videChampConnexion();
-					// vue.videEcran();
+					vue.videEcran();
 					vue.affiche("Connexion réussie");
 				}
 				else
@@ -99,7 +99,7 @@ public class Controlleur {
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
 				if (modele.connexion()){
 					vue.videChampConnexion();
-					// vue.videEcran();
+					vue.videEcran();
 					vue.affiche("Connexion réussie");
 				}
 				else
@@ -164,6 +164,7 @@ public class Controlleur {
 
 				if (((ClientM) modele).Inscription()){
 					vue.videChampInscription();
+					vue.videEcran();
 					vue.affiche("Inscription effectuée avec succès");
 				}
 				else
