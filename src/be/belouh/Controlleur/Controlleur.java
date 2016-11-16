@@ -26,7 +26,7 @@ public class Controlleur {
 	}
 
 	public String verificationChampInscription() {
-		String res = "Les champ(s) suivant(s) ne sont pas remplis :";
+		String res = "Le(s) champ(s) suivant(s) ne sont pas remplis : ";
 		if (vue.getNomInscription().equals(""))
 			res += "\nNom, ";
 		if (vue.getPrenomInscription().equals(""))
@@ -49,7 +49,7 @@ public class Controlleur {
 			res += "Confirmer le mot de passe, ";
 		if (vue.getNumeroCompteInscription().equals(""))
 			res += "Numéro de compte, ";
-		if (res.equals("Les champ(s) suivant(s) ne sont pas remplis :"))
+		if (res.equals("Le(s) champ(s) suivant(s) ne sont pas remplis : "))
 			res = "";
 		else
 			res = res.substring(0, res.length() - 2);
@@ -73,9 +73,11 @@ public class Controlleur {
 				modele = new ClientM();
 				modele.getUtilisateur().setAdresseMail(vue.getAdresseMail());
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
-				if (modele.connexion())
+				if (modele.connexion()){
+					vue.videChampConnexion();
 					// vue.videEcran();
 					vue.affiche("Connexion réussie");
+				}
 				else
 					vue.affiche("échec connexion");
 				break;
@@ -83,9 +85,11 @@ public class Controlleur {
 				modele = new MoniteurM();
 				modele.getUtilisateur().setAdresseMail(vue.getAdresseMail());
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
-				if (modele.connexion())
+				if (modele.connexion()){
+					vue.videChampConnexion();
 					// vue.videEcran();
 					vue.affiche("Connexion réussie");
+				}
 				else
 					vue.affiche("échec connexion");
 				break;
@@ -93,9 +97,11 @@ public class Controlleur {
 				modele = new AdministrateurM();
 				modele.getUtilisateur().setAdresseMail(vue.getAdresseMail());
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
-				if (modele.connexion())
+				if (modele.connexion()){
+					vue.videChampConnexion();
 					// vue.videEcran();
 					vue.affiche("Connexion réussie");
+				}
 				else
 					vue.affiche("échec connexion");
 				break;
@@ -110,6 +116,7 @@ public class Controlleur {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			vue.videChampConnexion();
 			vue.videEcran();
 			vue.afficheEcranInscription();
 		}
@@ -126,10 +133,10 @@ public class Controlleur {
 				vue.afficheInscrire();
 				break;
 			case "Moniteur":
-				vue.cacherInscrire();
+				vue.cacheInscrire();
 				break;
 			case "Administrateur":
-				vue.cacherInscrire();
+				vue.cacheInscrire();
 				break;
 			default:
 				break;
@@ -155,8 +162,10 @@ public class Controlleur {
 						vue.getAdresseEmailInscription(), vue.getMotDePasseInscription(),
 						vue.getNumeroCompteInscription());
 
-				if (((ClientM) modele).Inscription())
+				if (((ClientM) modele).Inscription()){
+					vue.videChampInscription();
 					vue.affiche("Inscription effectuée avec succès");
+				}
 				else
 					vue.affiche("Cette adresse e-mail est déjà attribué à un autre client");
 			}
@@ -169,6 +178,7 @@ public class Controlleur {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (vue.demande("Voulez-vous revenir à l'écran de connexion?")) {
+				vue.videChampInscription();
 				vue.videEcran();
 				vue.afficheEcranConnexion();
 			}

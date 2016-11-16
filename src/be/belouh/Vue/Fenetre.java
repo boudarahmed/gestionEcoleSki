@@ -202,10 +202,15 @@ public class Fenetre extends JFrame {
 		buttonInscriptionClient.setText("S'inscrire");
 	}
 
-	public void cacherInscrire() {
+	public void cacheInscrire() {
 		buttonInscriptionClient.setText("");
 	}
-
+	
+	public void videChampConnexion(){
+		textFieldAdresseMail.setText("");
+		passwordFieldMotDePasse.setText("");
+	}
+	
 	// METHODES D'AFFICHAGE DE L'ECRAN D'INSCRIPTION
 	public void afficheEcranInscription() {
 		panelInscription.setSize(800, 600);
@@ -299,6 +304,21 @@ public class Fenetre extends JFrame {
 		panelInscription.add(textFieldInscriptionNumeroCompte);
 
 		panel.add(panelInscription);
+	}
+	
+	public void videChampInscription(){
+		textFieldInscriptionNom.setText("");
+		textFieldInscriptionPrenom.setText("");
+		modelInscriptionDateNaissance.setSelected(false);
+		radioMInscriptionSexe.setSelected(true);
+		textFieldInscriptionNumero.setText("");
+		textFieldInscriptionRue.setText("");
+		textFieldInscriptionCodePostal.setText("");
+		textFieldInscriptionVille.setText("");
+		textFieldInscriptionAdresseMail.setText("");
+		passwordFieldInscriptionMotDePasse.setText("");
+		passwordFieldInscriptionConfirmMotDePasse.setText("");
+		textFieldInscriptionNumeroCompte.setText("");
 	}
 
 	// LISTENER DE L'ECRAN DE CONNEXION
