@@ -73,7 +73,7 @@ public class Controlleur {
 				modele.getUtilisateur().setAdresseMail(vue.getAdresseMail());
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
 				if (modele.connexion())
-					//vue.videEcran();
+					// vue.videEcran();
 					vue.affiche("Connexion réussie");
 				else
 					vue.affiche("échec connexion");
@@ -83,7 +83,7 @@ public class Controlleur {
 				modele.getUtilisateur().setAdresseMail(vue.getAdresseMail());
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
 				if (modele.connexion())
-					//vue.videEcran();
+					// vue.videEcran();
 					vue.affiche("Connexion réussie");
 				else
 					vue.affiche("échec connexion");
@@ -93,7 +93,7 @@ public class Controlleur {
 				modele.getUtilisateur().setAdresseMail(vue.getAdresseMail());
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
 				if (modele.connexion())
-					//vue.videEcran();
+					// vue.videEcran();
 					vue.affiche("Connexion réussie");
 				else
 					vue.affiche("échec connexion");
@@ -153,7 +153,7 @@ public class Controlleur {
 						vue.getRueInscription(), vue.getCodePostalInscription(), vue.getVilleInscription(),
 						vue.getAdresseEmailInscription(), vue.getMotDePasseInscription(),
 						vue.getNumeroCompteInscription());
-				
+
 				if (((ClientM) modele).Inscription())
 					vue.affiche("Inscription effectuée avec succès");
 				else

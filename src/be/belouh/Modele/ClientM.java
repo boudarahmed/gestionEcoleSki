@@ -26,12 +26,12 @@ public class ClientM extends UtilisateurM {
 		((Client) utilisateur).setNumeroCompte(numeroCompte);
 	}
 
-	public boolean Inscription(){
+	public boolean Inscription() {
 		ListeClientS liste = ListeClientS.getInstance();
 		System.out.println(liste.getListe());
-		utilisateur = liste.ajouterClient((Client)utilisateur);
+		utilisateur = liste.ajouterClient((Client) utilisateur);
 		System.out.println(liste.getListe());
-		if(utilisateur == null)
+		if (utilisateur == null)
 			return false;
 		else
 			return true;

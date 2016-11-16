@@ -15,7 +15,9 @@ public class ListeClientS {
 	private static ListeClientS instance = null;
 
 	private ListeClientS() {
-		//On récupere tous les clients de la base de données et on rempli leur liste de reservation grace au singleton liste de reservation et leurs liste d'eleve grace au singleton eleve
+		// On récupere tous les clients de la base de données et on rempli leur
+		// liste de reservation grace au singleton liste de reservation et leurs
+		// liste d'eleve grace au singleton eleve
 		DAO<Client> m = new ClientDAO();
 		ArrayList<Integer> id = m.compter();
 		ListeReservationS listeReservation = ListeReservationS.getInstance();
@@ -25,16 +27,16 @@ public class ListeClientS {
 
 		while (it.hasNext())
 			liste.add(m.trouver(it.next()));
-		
+
 		itC = liste.iterator();
-		while(itC.hasNext()){
+		while (itC.hasNext()) {
 			Client client = itC.next();
 			for (Reservation reservation : listeReservation.getListe()) {
-				if(reservation.getClient().equals(client))
+				if (reservation.getClient().equals(client))
 					client.getListeReservation().add(reservation);
 			}
 			for (Eleve eleve : listeEleve.getListe()) {
-				if(eleve.getClient().equals(client))
+				if (eleve.getClient().equals(client))
 					client.getListeEleve().add(eleve);
 			}
 		}
@@ -45,23 +47,22 @@ public class ListeClientS {
 			instance = new ListeClientS();
 		return instance;
 	}
-	
-	public Client ajouterClient(Client c){
+
+	public Client ajouterClient(Client c) {
 		DAO<Client> cl = new ClientDAO();
 		boolean flag = false;
 		for (Client client : liste) {
-			if(client.getAdresseMail().equals(c.getAdresseMail()))
+			if (client.getAdresseMail().equals(c.getAdresseMail()))
 				flag = true;
 		}
-		if(!flag){
+		if (!flag) {
 			c = cl.inserer(c);
 			liste.add(c);
-			return c;	
-		}
-		else
+			return c;
+		} else
 			return null;
 	}
-	
+
 	public ArrayList<Client> getListe() {
 		return liste;
 	}
