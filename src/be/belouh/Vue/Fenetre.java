@@ -2,6 +2,7 @@ package be.belouh.Vue;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -12,6 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 public class Fenetre extends JFrame {
 
@@ -34,6 +39,39 @@ public class Fenetre extends JFrame {
 	private JButton buttonInscriptionClient = new JButton("S'inscrire");
 	private JButton buttonConnexion = new JButton("Connexion");
 
+	// COMPOSANTS DE L'ECRAN D'INSCRIPTION
+	private JPanel panelInscription = new JPanel(null);
+	private JLabel labelInscriptionNom = new JLabel("Nom");
+	private JTextField textFieldInscriptionNom = new JTextField();
+	private JLabel labelInsciptionPrenom = new JLabel("Prénom");
+	private JTextField textFieldInscriptionPrenom = new JTextField();
+	private JLabel labelInscriptionDateNaissance = new JLabel("Date de naissance");
+	private UtilDateModel modelInscriptionDateNaissance = new UtilDateModel();
+	private JDatePanelImpl datePanelInscriptionDateNaissance = new JDatePanelImpl(modelInscriptionDateNaissance);
+	private JDatePickerImpl datePickerInscriptionDateNaissance = new JDatePickerImpl(datePanelInscriptionDateNaissance);
+	private JLabel labelInscriptionSexe = new JLabel("Sexe");
+	private JRadioButton radioMInscriptionSexe = new JRadioButton("M", true);
+	private JRadioButton radioFInscriptionSexe = new JRadioButton("F");
+	private ButtonGroup buttonGroupInscriptionSexe = new ButtonGroup();
+	private JLabel labelInscriptionNumero = new JLabel("Numéro");
+	private JTextField textFieldInscriptionNumero = new JTextField();
+	private JLabel labelInscriptionRue = new JLabel("Rue");
+	private JTextField textFieldInscriptionRue = new JTextField();
+	private JLabel labelInscriptionCodePostal = new JLabel("Code postal");
+	private JTextField textFieldInscriptionCodePostal = new JTextField();
+	private JLabel labelInscriptionVille = new JLabel("Ville");
+	private JTextField textFieldInscriptionVille = new JTextField();
+	private JLabel labelInscriptionAdresseMail = new JLabel("Adresse e-mail");
+	private JTextField textFieldInscriptionAdresseMail = new JTextField();
+	private JLabel labelInscriptionMotDePasse = new JLabel("Mot de passe");
+	private JPasswordField passwordFieldInscriptionMotDePasse = new JPasswordField();
+	private JLabel labelInscriptionConfirmMotDePasse = new JLabel("Confirmer le mot de passe");
+	private JPasswordField passwordFieldInscriptionConfirmMotDePasse = new JPasswordField();
+	private JLabel labelInscriptionNumeroCompte = new JLabel("Numéro de compte");
+	private JTextField textFieldInscriptionNumeroCompte = new JTextField();
+	private JButton buttonInscriptionValidation = new JButton("Valider");
+	private JButton buttonInscriptionAnnulation = new JButton("Annuler");
+
 	public Fenetre() {
 		panel.setOpaque(true);
 		setContentPane(panel);
@@ -41,10 +79,11 @@ public class Fenetre extends JFrame {
 		setSize(800, 600);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setTitle("Gestion école ski");
+		setTitle("Projet Java");
 		setVisible(true);
 	}
 
+	// RECUPERATION DES CHAMPS DE L'ECRAN DE CONNEXION
 	public String getAdresseMail() {
 		return textFieldAdresseMail.getText();
 	}
@@ -52,17 +91,70 @@ public class Fenetre extends JFrame {
 	public String getMotDePasse() {
 		return String.valueOf(passwordFieldMotDePasse.getPassword());
 	}
-	
-	public String getRadioUtilisateur(){
-		if(radioClient.isSelected())
+
+	public String getRadioUtilisateur() {
+		if (radioClient.isSelected())
 			return radioClient.getText();
-		else if(radioMoniteur.isSelected())
+		else if (radioMoniteur.isSelected())
 			return radioMoniteur.getText();
 		else
 			return radioAdministrateur.getText();
 	}
 
-	public void AfficheEcranConnexion() {
+	// RECUPERATION DES CHAMPS DE L'ECRAN D'INSCRIPTION
+	public String getNomInscription() {
+		return textFieldInscriptionNom.getText();
+	}
+
+	public String getPrenomInscription() {
+		return textFieldInscriptionPrenom.getText();
+	}
+
+	public Date getDateNaissanceInscription() {
+		return (Date) datePickerInscriptionDateNaissance.getModel().getValue();
+	}
+
+	public char getSexeInscription() {
+		if (radioMInscriptionSexe.isSelected())
+			return radioMInscriptionSexe.getText().toCharArray()[0];
+		else
+			return radioFInscriptionSexe.getText().toCharArray()[0];
+	}
+
+	public String getNumeroInscription() {
+		return textFieldInscriptionNumero.getText();
+	}
+
+	public String getRueInscription() {
+		return textFieldInscriptionRue.getText();
+	}
+
+	public String getCodePostalInscription() {
+		return textFieldInscriptionCodePostal.getText();
+	}
+
+	public String getVilleInscription() {
+		return textFieldInscriptionVille.getText();
+	}
+
+	public String getAdresseEmailInscription() {
+		return textFieldInscriptionAdresseMail.getText();
+	}
+
+	public String getMotDePasseInscription() {
+		return String.valueOf(passwordFieldInscriptionMotDePasse.getPassword());
+	}
+
+	public String getConfirmMotDePasseInscription() {
+		return String.valueOf(passwordFieldInscriptionConfirmMotDePasse.getPassword());
+	}
+
+	public String getNumeroCompteInscription() {
+		return textFieldInscriptionNumeroCompte.getText();
+	}
+
+	// METHODES D'AFFICHAGE DE L'ECRAN DE CONNEXION
+	public void afficheEcranConnexion() {
 		panelConnexion.setSize(400, 300);
 		panelConnexion.setLocation(200, 125);
 
@@ -106,20 +198,147 @@ public class Fenetre extends JFrame {
 		panel.add(panelConnexion);
 	}
 
+	public void afficheInscrire() {
+		buttonInscriptionClient.setText("S'inscrire");
+	}
+
+	public void cacherInscrire() {
+		buttonInscriptionClient.setText("");
+	}
+
+	// METHODES D'AFFICHAGE DE L'ECRAN D'INSCRIPTION
+	public void afficheEcranInscription() {
+		panelInscription.setSize(800, 600);
+		panelInscription.setLocation(0, 0);
+
+		labelInscriptionNom.setSize(30, 25);
+		labelInscriptionNom.setLocation(210, 65);
+		labelInsciptionPrenom.setSize(50, 25);
+		labelInsciptionPrenom.setLocation(190, 100);
+		labelInscriptionDateNaissance.setSize(110, 25);
+		labelInscriptionDateNaissance.setLocation(130, 135);
+		labelInscriptionSexe.setSize(30, 25);
+		labelInscriptionSexe.setLocation(205, 170);
+		labelInscriptionNumero.setSize(50, 25);
+		labelInscriptionNumero.setLocation(190, 205);
+		labelInscriptionRue.setSize(30, 25);
+		labelInscriptionRue.setLocation(210, 240);
+		labelInscriptionCodePostal.setSize(70, 25);
+		labelInscriptionCodePostal.setLocation(165, 275);
+		labelInscriptionVille.setSize(30, 25);
+		labelInscriptionVille.setLocation(205, 310);
+		labelInscriptionAdresseMail.setSize(90, 25);
+		labelInscriptionAdresseMail.setLocation(145, 345);
+		labelInscriptionMotDePasse.setSize(80, 25);
+		labelInscriptionMotDePasse.setLocation(155, 380);
+		labelInscriptionConfirmMotDePasse.setSize(160, 25);
+		labelInscriptionConfirmMotDePasse.setLocation(80, 415);
+		labelInscriptionNumeroCompte.setSize(120, 25);
+		labelInscriptionNumeroCompte.setLocation(120, 450);
+		buttonInscriptionValidation.setSize(80, 30);
+		buttonInscriptionValidation.setLocation(670, 505);
+		buttonInscriptionAnnulation.setSize(80, 30);
+		buttonInscriptionAnnulation.setLocation(580, 505);
+
+		textFieldInscriptionNom.setSize(300, 25);
+		textFieldInscriptionNom.setLocation(250, 65);
+		textFieldInscriptionPrenom.setSize(300, 25);
+		textFieldInscriptionPrenom.setLocation(250, 100);
+		datePickerInscriptionDateNaissance.setSize(300, 26);
+		datePickerInscriptionDateNaissance.setLocation(250, 135);
+		radioMInscriptionSexe.setSize(40, 25);
+		radioFInscriptionSexe.setSize(40, 25);
+		radioMInscriptionSexe.setLocation(250, 170);
+		radioFInscriptionSexe.setLocation(290, 170);
+		buttonGroupInscriptionSexe.add(radioMInscriptionSexe);
+		buttonGroupInscriptionSexe.add(radioFInscriptionSexe);
+		textFieldInscriptionNumero.setSize(300, 25);
+		textFieldInscriptionNumero.setLocation(250, 205);
+		textFieldInscriptionRue.setSize(300, 25);
+		textFieldInscriptionRue.setLocation(250, 240);
+		textFieldInscriptionCodePostal.setSize(300, 25);
+		textFieldInscriptionCodePostal.setLocation(250, 275);
+		textFieldInscriptionVille.setSize(300, 25);
+		textFieldInscriptionVille.setLocation(250, 310);
+		textFieldInscriptionAdresseMail.setSize(300, 25);
+		textFieldInscriptionAdresseMail.setLocation(250, 345);
+		passwordFieldInscriptionMotDePasse.setSize(300, 25);
+		passwordFieldInscriptionMotDePasse.setLocation(250, 380);
+		passwordFieldInscriptionConfirmMotDePasse.setSize(300, 25);
+		passwordFieldInscriptionConfirmMotDePasse.setLocation(250, 415);
+		textFieldInscriptionNumeroCompte.setSize(300, 25);
+		textFieldInscriptionNumeroCompte.setLocation(250, 450);
+
+		panelInscription.add(labelInscriptionNom);
+		panelInscription.add(labelInsciptionPrenom);
+		panelInscription.add(labelInscriptionDateNaissance);
+		panelInscription.add(labelInscriptionSexe);
+		panelInscription.add(labelInscriptionNumero);
+		panelInscription.add(labelInscriptionRue);
+		panelInscription.add(labelInscriptionCodePostal);
+		panelInscription.add(labelInscriptionVille);
+		panelInscription.add(labelInscriptionAdresseMail);
+		panelInscription.add(labelInscriptionMotDePasse);
+		panelInscription.add(labelInscriptionConfirmMotDePasse);
+		panelInscription.add(labelInscriptionNumeroCompte);
+		panelInscription.add(buttonInscriptionValidation);
+		panelInscription.add(buttonInscriptionAnnulation);
+
+		panelInscription.add(textFieldInscriptionNom);
+		panelInscription.add(textFieldInscriptionPrenom);
+		panelInscription.add(datePickerInscriptionDateNaissance);
+		panelInscription.add(radioMInscriptionSexe);
+		panelInscription.add(radioFInscriptionSexe);
+		panelInscription.add(textFieldInscriptionNumero);
+		panelInscription.add(textFieldInscriptionRue);
+		panelInscription.add(textFieldInscriptionCodePostal);
+		panelInscription.add(textFieldInscriptionVille);
+		panelInscription.add(textFieldInscriptionAdresseMail);
+		panelInscription.add(passwordFieldInscriptionMotDePasse);
+		panelInscription.add(passwordFieldInscriptionConfirmMotDePasse);
+		panelInscription.add(textFieldInscriptionNumeroCompte);
+
+		panel.add(panelInscription);
+	}
+
+	// LISTENER DE L'ECRAN DE CONNEXION
+	public void addbuttonConnexionListener(ActionListener ButtonConnexionlistener) {
+		buttonConnexion.addActionListener(ButtonConnexionlistener);
+	}
+
+	public void addbuttonInscriptionListener(ActionListener ButtonInscriptionListener) {
+		buttonInscriptionClient.addActionListener(ButtonInscriptionListener);
+	}
+
+	public void addbuttonRadioConnexionListener(ActionListener ButtoRadioConnexionListener) {
+		radioClient.addActionListener(ButtoRadioConnexionListener);
+		radioMoniteur.addActionListener(ButtoRadioConnexionListener);
+		radioAdministrateur.addActionListener(ButtoRadioConnexionListener);
+	}
+
+	// LISTENER DE L'ECRAN D'INSCRIPTION
+	public void addbuttonValiderInscriptionListener(ActionListener ButtonValiderInscriptionListener) {
+		buttonInscriptionValidation.addActionListener(ButtonValiderInscriptionListener);
+	}
+
+	public void addbuttonAnnulerInscriptionListener(ActionListener ButtonAnnulerInscriptionListener) {
+		buttonInscriptionAnnulation.addActionListener(ButtonAnnulerInscriptionListener);
+	}
+
+	// METHODES POUR LA FENETRE
 	public void videEcran() {
 		panel.removeAll();
 		panel.updateUI();
 	}
 
-	public void affiche(String error) {
-		JOptionPane.showMessageDialog(this, error);
+	public void affiche(String text) {
+		JOptionPane.showMessageDialog(this, text);
 	}
 
-	public void addbuttonConnexionListener(ActionListener ButtonConnexionlistener) {
-		buttonConnexion.addActionListener(ButtonConnexionlistener);
-	}
-
-	public void addbuttonInscriptionClientListener(ActionListener ButtonInscriptionListener) {
-		buttonInscriptionClient.addActionListener(ButtonInscriptionListener);
+	public boolean demande(String text) {
+		if (JOptionPane.showConfirmDialog(this, text) == 0)
+			return true;
+		else
+			return false;
 	}
 }

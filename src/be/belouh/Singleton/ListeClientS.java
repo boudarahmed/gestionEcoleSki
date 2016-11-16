@@ -45,7 +45,23 @@ public class ListeClientS {
 			instance = new ListeClientS();
 		return instance;
 	}
-
+	
+	public Client ajouterClient(Client c){
+		DAO<Client> cl = new ClientDAO();
+		boolean flag = false;
+		for (Client client : liste) {
+			if(client.getAdresseMail().equals(c.getAdresseMail()))
+				flag = true;
+		}
+		if(!flag){
+			c = cl.inserer(c);
+			liste.add(c);
+			return c;	
+		}
+		else
+			return null;
+	}
+	
 	public ArrayList<Client> getListe() {
 		return liste;
 	}
