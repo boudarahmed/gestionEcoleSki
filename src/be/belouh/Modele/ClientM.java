@@ -28,9 +28,8 @@ public class ClientM extends UtilisateurM {
 
 	public boolean Inscription() {
 		ListeClientS liste = ListeClientS.getInstance();
-		System.out.println(liste.getListe());
 		utilisateur = liste.ajouterClient((Client) utilisateur);
-		System.out.println(liste.getListe());
+
 		if (utilisateur == null)
 			return false;
 		else

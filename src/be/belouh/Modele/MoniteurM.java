@@ -1,4 +1,4 @@
-package be.belouh.Controlleur;
+package be.belouh.Modele;
 
 import be.belouh.Modele.UtilisateurM;
 import be.belouh.POJO.Moniteur;
