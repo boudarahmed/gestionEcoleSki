@@ -62,6 +62,6 @@ public class Eleve extends Personne {
 
 	@Override
 	public String toString() {
-		return this.getNom() + " " + this.getPrenom() + "né(e) le" + this.getDateNaissance();
+		return this.getNom() + " " + this.getPrenom() + " né(e) le " + this.getDateNaissance();
 	}
 }
