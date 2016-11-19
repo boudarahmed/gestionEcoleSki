@@ -73,6 +73,6 @@ public class Semaine {
 
 	@Override
 	public String toString() {
-		return "du " +  new SimpleDateFormat("dd-MM-yy").format(this.getDateDeb()) + " au " + new SimpleDateFormat("dd-MM-yy").format(this.getDateFin());
+		return new SimpleDateFormat("dd/MM/yyyy").format(this.getDateDeb()) + " au " + new SimpleDateFormat("dd/MM/yyyy").format(this.getDateFin());
 	}
 }
