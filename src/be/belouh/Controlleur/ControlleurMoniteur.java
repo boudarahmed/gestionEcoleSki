@@ -2,13 +2,11 @@ package be.belouh.Controlleur;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import be.belouh.Modele.MoniteurM;
 import be.belouh.POJO.Cours;
 import be.belouh.POJO.CoursCollectif;
 import be.belouh.POJO.CoursParticulier;
-import be.belouh.POJO.Moniteur;
 import be.belouh.POJO.Semaine;
 import be.belouh.Singleton.ListeSemaineS;
 import be.belouh.Vue.EcranMoniteur;
@@ -54,13 +52,12 @@ public class ControlleurMoniteur {
 
 	public void miseAjourData() {
 		if (semaineCourante != null) {
+			String label;
+			ArrayList<Cours> liste;
 			if (coursCollectif) {
-				String label = "Voici votre liste de cours collectifs (" + semaineCourante.toString() + ")";
-				Moniteur m = (Moniteur) modele.getUtilisateur();
-				ArrayList<Cours> liste = (ArrayList<Cours>) m.getListeCours().stream().filter(
-						x -> x instanceof CoursCollectif && ((CoursCollectif) x).getSemaine().equals(semaineCourante))
-						.collect(Collectors.toList());
-
+				label = "Voici votre liste de cours collectifs (" + semaineCourante.toString() + ")";
+				liste = modele.triCours(coursCollectif, semaineCourante);
+				
 				Object[][] data = new Object[liste.size()][6];
 
 				for (int i = 0; i < liste.size(); i++) {
@@ -77,11 +74,8 @@ public class ControlleurMoniteur {
 				}
 				vue.afficherliste(data, champCoursCollectif, label);
 			} else {
-				String label = "Voici votre liste de cours particuliers (" + semaineCourante.toString() + ")";
-				Moniteur m = (Moniteur) modele.getUtilisateur();
-				ArrayList<Cours> liste = (ArrayList<Cours>) m.getListeCours().stream().filter(
-						x -> x instanceof CoursParticulier && ((CoursParticulier) x).getDate().after(semaineCourante.getDateDeb()) && ((CoursParticulier) x).getDate().before(semaineCourante.getDateFin()))
-						.collect(Collectors.toList());
+				label = "Voici votre liste de cours particuliers (" + semaineCourante.toString() + ")";
+				liste = modele.triCours(coursCollectif, semaineCourante);
 
 				Object[][] data = new Object[liste.size()][6];
 
