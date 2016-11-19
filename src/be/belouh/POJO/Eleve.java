@@ -65,9 +65,9 @@ public class Eleve extends Personne {
 
 	@Override
 	public String toString() {
-		return this.getNom() + " " + this.getPrenom() + " "
+		return this.getNom() + " " + this.getPrenom() + " ("
 				+ Period.between(this.getDateNaissance().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
 						new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()).getYears()
-				+ " ans\n";
+				+ " ans)\n";
 	}
 }

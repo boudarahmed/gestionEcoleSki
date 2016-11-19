@@ -90,7 +90,6 @@ public class Connexion extends Fenetre {
 		passwordFieldMotDePasse.setForeground(Color.LIGHT_GRAY);
 		passwordFieldMotDePasse.setEchoChar((char) 0);
 
-		radioClient.setForeground(Color.BLACK);
 		radioClient.setSize(55, 25);
 		radioClient.setLocation(75, 290);
 

@@ -1,8 +1,12 @@
 package be.belouh.Modele;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import be.belouh.POJO.Client;
+import be.belouh.POJO.Eleve;
+import be.belouh.POJO.Reservation;
 import be.belouh.Singleton.ListeClientS;
 
 public class ClientM extends UtilisateurM {
@@ -34,6 +38,17 @@ public class ClientM extends UtilisateurM {
 			return false;
 		else
 			return true;
+	}
+
+	public ArrayList<Eleve> getListeEleve() {
+		return ((Client) getUtilisateur()).getListeEleve();
+	}
+
+	public ArrayList<Reservation> triReservation(String statut, Eleve eleve) {
+		ArrayList<Reservation> liste = (ArrayList<Reservation>) ((Client) getUtilisateur()).getListeReservation()
+				.stream().filter(x -> x.getStatutReservation().equals(statut) && x.getEleve().equals(eleve))
+				.collect(Collectors.toList());
+		return liste;
 	}
 
 	@Override

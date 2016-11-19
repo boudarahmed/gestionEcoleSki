@@ -18,6 +18,5 @@ public class Main {
 			// Si nimbus n'est pas disponible on laisse le theme par defaut
 		}
 		new ControlleurConnexion();
-		//new EcranMoniteur();
 	}
 }
