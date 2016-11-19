@@ -1,6 +1,9 @@
 package be.belouh.POJO;
 
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Eleve extends Personne {
 	// ATTRIBUTS
@@ -62,6 +65,9 @@ public class Eleve extends Personne {
 
 	@Override
 	public String toString() {
-		return this.getNom() + " " + this.getPrenom() + " né(e) le " + this.getDateNaissance();
+		return this.getNom() + " " + this.getPrenom() + " "
+				+ Period.between(this.getDateNaissance().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+						new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()).getYears()
+				+ " ans\n";
 	}
 }

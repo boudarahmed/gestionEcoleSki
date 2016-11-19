@@ -27,7 +27,7 @@ public class ControlleurInscription {
 		vue.addbuttonValiderListener(e -> {
 			String verif = validationFormulaire();
 			if (!verif.equals(""))
-				vue.afficheMessage(verif, JOptionPane.ERROR_MESSAGE);
+				vue.afficheMessage(verif, "Erreur", JOptionPane.ERROR_MESSAGE);
 			else {
 				modele = new ClientM(vue.getNom(), vue.getPrenom(), vue.getDateNaissance(), vue.getSexe(),
 						vue.getNumero(), vue.getRue(), vue.getCodePostal(), vue.getVille(), vue.getAdresseMail(),
@@ -35,7 +35,7 @@ public class ControlleurInscription {
 				if (modele.Inscription()) {
 					vue.dispose();
 				} else {
-					vue.afficheMessage("Cette adresse e-mail est déjà utilisée par un autre client",
+					vue.afficheMessage("Cette adresse e-mail est déjà utilisée par un autre client", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}

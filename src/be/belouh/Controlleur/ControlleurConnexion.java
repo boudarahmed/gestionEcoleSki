@@ -31,7 +31,8 @@ public class ControlleurConnexion {
 				if (modele.connexion())
 					vue.dispose();
 				else
-					vue.afficheMessage("Votre email ou votre mot de passe est incorrect", JOptionPane.ERROR_MESSAGE);
+					vue.afficheMessage("Votre email ou votre mot de passe est incorrect", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				break;
 			case "Moniteur":
 				modele = new MoniteurM();
@@ -41,7 +42,8 @@ public class ControlleurConnexion {
 					vue.dispose();
 					new ControlleurMoniteur((MoniteurM) modele);
 				} else
-					vue.afficheMessage("Votre email ou votre mot de passe est incorrect", JOptionPane.ERROR_MESSAGE);
+					vue.afficheMessage("Votre email ou votre mot de passe est incorrect", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				break;
 			case "Administrateur":
 				modele = new AdministrateurM();
@@ -50,7 +52,8 @@ public class ControlleurConnexion {
 				if (modele.connexion())
 					vue.dispose();
 				else
-					vue.afficheMessage("Votre email ou votre mot de passe est incorrect", JOptionPane.ERROR_MESSAGE);
+					vue.afficheMessage("Votre email ou votre mot de passe est incorrect", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				break;
 			default:
 				break;

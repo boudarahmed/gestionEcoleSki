@@ -3,10 +3,14 @@ package be.belouh.Controlleur;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+
 import be.belouh.Modele.MoniteurM;
 import be.belouh.POJO.Cours;
 import be.belouh.POJO.CoursCollectif;
 import be.belouh.POJO.CoursParticulier;
+import be.belouh.POJO.Eleve;
 import be.belouh.POJO.Semaine;
 import be.belouh.Singleton.ListeSemaineS;
 import be.belouh.Vue.EcranMoniteur;
@@ -28,7 +32,7 @@ public class ControlleurMoniteur {
 		miseAjourData();
 
 		vue.addmenu1Item1Listener(e -> {
-			if(vue.demande("Voulez-vous vous déconnecter?")){
+			if (vue.demande("Voulez-vous vous déconnecter?")) {
 				vue.dispose();
 				new ControlleurConnexion();
 			}
@@ -48,6 +52,21 @@ public class ControlleurMoniteur {
 			semaineCourante = (Semaine) vue.Chosis(ListeSemaineS.getInstance().getListe().toArray());
 			miseAjourData();
 		});
+
+		vue.addListeListener(e -> {
+			if(!e.getValueIsAdjusting()){
+				ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+				if(!lsm.isSelectionEmpty()){
+					int selectedRow = lsm.getMinSelectionIndex();
+					StringBuilder msg = new StringBuilder("");
+					Cours c = modele.getCours(vue.getDataSelection(selectedRow, 6), coursCollectif, semaineCourante);
+					for (Eleve eleve : c.getListeEleve()) {
+						msg.append(eleve.toString());
+					}
+					vue.afficheMessage(msg.toString(), "Liste d'élève de ce cours", JOptionPane.PLAIN_MESSAGE);
+				}
+			}
+		});
 	}
 
 	public void miseAjourData() {
@@ -57,7 +76,7 @@ public class ControlleurMoniteur {
 			if (coursCollectif) {
 				label = "Voici votre liste de cours collectifs (" + semaineCourante.toString() + ")";
 				liste = modele.triCours(coursCollectif, semaineCourante);
-				
+
 				Object[][] data = new Object[liste.size()][6];
 
 				for (int i = 0; i < liste.size(); i++) {

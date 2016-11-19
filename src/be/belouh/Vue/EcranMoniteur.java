@@ -14,6 +14,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class EcranMoniteur extends Fenetre {
@@ -52,7 +53,16 @@ public class EcranMoniteur extends Fenetre {
 
 	}
 
-	// METHODES D'AFFICHAGE DE L'ECRAN DE CONNEXION
+	// RECUPERATION DONNEES DE L'ECRAN MONITEUR
+	public Object[] getDataSelection(int l, int c) {
+		Object[] res = new Object[c];
+		for(int i = 0; i < c; i++){
+			res[i] = listeCours.getModel().getValueAt(l, i);
+		}
+		return res;
+	}
+
+	// METHODES D'AFFICHAGE DE L'ECRAN MONITEUR
 	public void creationPanel() {
 		panel.setOpaque(true);
 
@@ -90,7 +100,7 @@ public class EcranMoniteur extends Fenetre {
 		modele.fireTableDataChanged();
 	}
 
-	// LISTENER DE L'ECRAN D'INSCRIPTION
+	// LISTENER DE L'ECRAN MONITEUR
 	public void addmenu1Item1Listener(ActionListener menu1Item1Listener) {
 		menu1Item1.addActionListener(menu1Item1Listener);
 	}
@@ -102,8 +112,12 @@ public class EcranMoniteur extends Fenetre {
 	public void addmenu2Item2Listener(ActionListener menu2Item2Listener) {
 		menu2Item2.addActionListener(menu2Item2Listener);
 	}
-	
+
 	public void addmenu3Item1Listener(ActionListener menu3Item1Listener) {
 		menu3Item1.addActionListener(menu3Item1Listener);
+	}
+
+	public void addListeListener(ListSelectionListener listeListener) {
+		listeCours.getSelectionModel().addListSelectionListener(listeListener);
 	}
 }
