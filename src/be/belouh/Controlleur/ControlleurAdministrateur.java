@@ -24,6 +24,7 @@ import be.belouh.POJO.CoursParticulier;
 import be.belouh.POJO.Eleve;
 import be.belouh.POJO.Moniteur;
 import be.belouh.POJO.Semaine;
+import be.belouh.Singleton.ListeAccreditationS;
 import be.belouh.Singleton.ListeCoursS;
 import be.belouh.Singleton.ListeMoniteurS;
 import be.belouh.Vue.EcranAdministrateur;
@@ -72,11 +73,27 @@ public class ControlleurAdministrateur {
 		});
 
 		vue.addmenu2Item3Listener(e -> {
-			
-		});
-
-		vue.addmenu2Item4Listener(e -> {
-
+			Moniteur moniteur = (Moniteur) vue.Chosis(ListeMoniteurS.getInstance().getListe().toArray(),
+					"Ajouter une accréditation à quelle moniteur?", "Choisir un moniteur");
+			if (moniteur != null) {
+				ArrayList<Accreditation> list = (ArrayList<Accreditation>) ListeAccreditationS.getInstance().getListe()
+						.stream().filter(x -> !moniteur.getListeAccreditation().contains(x))
+						.collect(Collectors.toList());
+				if (list.size() >= 1) {
+					Accreditation accrediation = (Accreditation) vue.Chosis(list.toArray(),
+							"Quelle accréditation voulez ajouter?", "Choisir une accrédiation");
+					if (accrediation != null) {
+						moniteur.getListeAccreditation().add(accrediation);
+						ListeMoniteurS.getInstance().mettreAjourMoniteur(moniteur);
+						miseAjourData();
+						vue.afficheMessage(accrediation.toString() + " ajoutée au moniteur " + moniteur.toString(),
+								"Information", JOptionPane.INFORMATION_MESSAGE);
+					}
+				} else {
+					vue.afficheMessage("Ce moniteur possède déjà toutes les accréditations", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
 		});
 
 		vue.addmenu3Item1Listener(e -> {

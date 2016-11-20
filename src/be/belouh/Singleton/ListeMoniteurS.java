@@ -51,6 +51,12 @@ public class ListeMoniteurS {
 			return null;
 	}
 
+	public Moniteur mettreAjourMoniteur(Moniteur m) {
+		DAO<Moniteur> mo = new MoniteurDAO();
+		m = mo.mettreAJour(m);
+		return m;
+	}
+
 	public static ListeMoniteurS getInstance() {
 		if (instance == null)
 			instance = new ListeMoniteurS();

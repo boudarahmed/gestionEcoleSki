@@ -79,8 +79,6 @@ public class Moniteur extends Utilisateur {
 
 	@Override
 	public String toString() {
-		return "Moniteur " + this.getNom() + " " + this.getPrenom() + " né le " + this.getDateNaissance() + "\nDomicile : "
-				+ this.getNumero() + " " + this.getRue() + " " + this.getCodePostal() + " " + this.getVille()
-				+ "\npaye : " + this.getSalaireHoraire() + " euros/h";
+		return this.getNom() + " " + this.getPrenom();
 	}
 }

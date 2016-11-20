@@ -31,8 +31,7 @@ public class EcranAdministrateur extends Fenetre {
 	private JMenuItem menu1Item1 = new JMenuItem("Déconnexion");
 	private JMenuItem menu2Item1 = new JMenuItem("Afficher la liste des moniteurs");
 	private JMenuItem menu2Item2 = new JMenuItem("Ajouter un moniteur");
-	private JMenuItem menu2Item3 = new JMenuItem("Ajouter une indisponibilité");
-	private JMenuItem menu2Item4 = new JMenuItem("Ajouter une accreditation");
+	private JMenuItem menu2Item3 = new JMenuItem("Ajouter une accreditation");
 	private JMenuItem menu3Item1 = new JMenuItem("Afficher les cours collectifs");
 	private JMenuItem menu3Item2 = new JMenuItem("Afficher les cours particuliers");
 	private DefaultTableModel modele = new DefaultTableModel();
@@ -67,7 +66,6 @@ public class EcranAdministrateur extends Fenetre {
 		menu2.add(menu2Item1);
 		menu2.add(menu2Item2);
 		menu2.add(menu2Item3);
-		menu2.add(menu2Item4);
 		menu3.add(menu3Item1);
 		menu3.add(menu3Item2);
 		menu1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -79,7 +77,6 @@ public class EcranAdministrateur extends Fenetre {
 		menu2Item3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		menu3Item1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		menu3Item2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		menu2Item4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		liste.setRowHeight(25);
 
@@ -115,10 +112,6 @@ public class EcranAdministrateur extends Fenetre {
 
 	public void addmenu2Item3Listener(ActionListener menu2Item3Listener) {
 		menu2Item3.addActionListener(menu2Item3Listener);
-	}
-	
-	public void addmenu2Item4Listener(ActionListener menu2Item4Listener) {
-		menu2Item4.addActionListener(menu2Item4Listener);
 	}
 
 	public void addmenu3Item1Listener(ActionListener menu3Item1Listener) {
