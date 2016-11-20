@@ -50,9 +50,10 @@ public class ControlleurConnexion {
 				modele = new AdministrateurM();
 				modele.getUtilisateur().setAdresseMail(vue.getAdresseMail());
 				modele.getUtilisateur().setMotDePasse(vue.getMotDePasse());
-				if (modele.connexion())
+				if (modele.connexion()) {
 					vue.dispose();
-				else
+					new ControlleurAdministrateur((AdministrateurM) modele);
+				} else
 					vue.afficheMessage("Votre email ou votre mot de passe est incorrect", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				break;

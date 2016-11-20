@@ -3,6 +3,8 @@ package be.belouh.POJO;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import be.belouh.Controlleur.ControlleurClient;
+
 public class CoursParticulier extends Cours {
 	// STATUT RESERVATION
 	public static final int MIN_ELEVE = 1;
@@ -62,7 +64,7 @@ public class CoursParticulier extends Cours {
 			return false;
 		else {
 			c = (CoursParticulier) obj;
-			if (c.getDate().equals(getDate()) && c.getHoraire().equals(getHoraire())
+			if (ControlleurClient.dateConvert(c.getDate()).equals(ControlleurClient.dateConvert(getDate())) && c.getHoraire().equals(getHoraire())
 					&& c.getAccreditation().equals(getAccreditation()))
 				return true;
 			else
@@ -72,7 +74,7 @@ public class CoursParticulier extends Cours {
 
 	@Override
 	public int hashCode() {
-		return this.getDate().hashCode() + this.getHoraire().hashCode() + this.getAccreditation().hashCode();
+		return ControlleurClient.dateConvert(this.getDate()).hashCode() + this.getHoraire().hashCode() + this.getAccreditation().hashCode();
 	}
 
 	@Override

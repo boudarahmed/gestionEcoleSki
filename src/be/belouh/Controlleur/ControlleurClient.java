@@ -411,7 +411,8 @@ public class ControlleurClient {
 				boolean flag2 = false;
 				boolean conge = false;
 				ArrayList<Moniteur> listeM = (ArrayList<Moniteur>) ListeMoniteurS.getInstance().getListe().stream()
-						.filter(x -> x.getListeAccreditation().contains(accreditation)).collect(Collectors.toList());
+						.filter(x -> x.getListeAccreditation().contains(accreditation) && x.getCoursParticulier())
+						.collect(Collectors.toList());
 				for (Moniteur moniteur : listeM) {
 					flag = true;
 					for (Semaine semaine : moniteur.getListeIndisponibilitee()) {
@@ -465,7 +466,7 @@ public class ControlleurClient {
 		}
 	}
 
-	public Date dateConvert(Date d) {
+	static public Date dateConvert(Date d) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(d);
 		cal.set(Calendar.HOUR_OF_DAY, 0);

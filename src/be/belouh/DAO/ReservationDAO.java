@@ -135,8 +135,9 @@ public class ReservationDAO extends DAO<Reservation> {
 
 					stmtLigneReservation.setInt(1, obj.getId());
 					stmtLigneReservation.setInt(2, itCours.next().getId());
-
+				
 					stmtLigneReservation.executeUpdate();
+					
 				} catch (SQLException ex) {
 					ex.printStackTrace();
 				}

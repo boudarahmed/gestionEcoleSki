@@ -14,7 +14,8 @@ public class ListeMoniteurS {
 	private static ListeMoniteurS instance = null;
 
 	private ListeMoniteurS() {
-		//On récupere tous les moniteurs de la base de données et on rempli leur liste de cours grace au singleton liste de cours
+		// On récupere tous les moniteurs de la base de données et on rempli
+		// leur liste de cours grace au singleton liste de cours
 		DAO<Moniteur> m = new MoniteurDAO();
 		ArrayList<Integer> id = m.compter();
 		ListeCoursS listeCours = ListeCoursS.getInstance();
@@ -23,16 +24,31 @@ public class ListeMoniteurS {
 
 		while (it.hasNext())
 			liste.add(m.trouver(it.next()));
-		
+
 		itM = liste.iterator();
-		while(itM.hasNext()){
+		while (itM.hasNext()) {
 			Moniteur moniteur = itM.next();
 			for (Cours cours : listeCours.getListe()) {
-				if(cours.getMoniteur().equals(moniteur))
+				if (cours.getMoniteur().equals(moniteur))
 					moniteur.getListeCours().add(cours);
 			}
 		}
-			
+
+	}
+
+	public Moniteur ajouterMoniteur(Moniteur m) {
+		DAO<Moniteur> mo = new MoniteurDAO();
+		boolean flag = false;
+		for (Moniteur moniteur : liste) {
+			if (moniteur.equals(m))
+				flag = true;
+		}
+		if (!flag) {
+			m = mo.inserer(m);
+			liste.add(m);
+			return m;
+		} else
+			return null;
 	}
 
 	public static ListeMoniteurS getInstance() {
@@ -40,7 +56,7 @@ public class ListeMoniteurS {
 			instance = new ListeMoniteurS();
 		return instance;
 	}
-	
+
 	public ArrayList<Moniteur> getListe() {
 		return liste;
 	}
