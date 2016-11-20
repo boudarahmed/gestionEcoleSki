@@ -109,6 +109,7 @@ public class ReservationDAO extends DAO<Reservation> {
 			stmtReservation.setDouble(3, obj.getPrix());
 			stmtReservation.setInt(4, obj.getClient().getId());
 			stmtReservation.setInt(5, obj.getEleve().getId());
+			stmtReservation.setInt(6, obj.getId());
 			stmtCours.setInt(1, obj.getId());
 
 			stmtReservation.executeUpdate();

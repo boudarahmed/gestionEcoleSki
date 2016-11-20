@@ -17,7 +17,8 @@ public class ListeCoursS {
 	private static ListeCoursS instance = null;
 
 	private ListeCoursS() {
-		//On récupere tous les cours de la base de données et on rempli leur liste d'eleve grace au singleton liste de reservation
+		// On récupere tous les cours de la base de données et on rempli leur
+		// liste d'eleve grace au singleton liste de reservation
 		DAO<CoursCollectif> m = new CoursCollectifDAO();
 		DAO<CoursParticulier> c = new CoursParticulierDAO();
 		ArrayList<Integer> id = m.compter();
@@ -33,12 +34,12 @@ public class ListeCoursS {
 
 		while (it.hasNext())
 			liste.add(c.trouver(it.next()));
-		
+
 		itC = liste.iterator();
-		while(itC.hasNext()){
+		while (itC.hasNext()) {
 			Cours cours = itC.next();
 			for (Reservation reservation : listeReservation.getListe()) {
-				if(reservation.getListeCours().contains(cours))
+				if (reservation.getListeCours().contains(cours))
 					cours.getListeEleve().add(reservation.getEleve());
 			}
 		}
@@ -48,6 +49,32 @@ public class ListeCoursS {
 		if (instance == null)
 			instance = new ListeCoursS();
 		return instance;
+	}
+
+	public Cours ajouterCours(Cours c) {
+		if (c instanceof CoursCollectif) {
+			DAO<CoursCollectif> cC = new CoursCollectifDAO();
+			c = cC.inserer((CoursCollectif) c);
+			liste.add(c);
+			return c;
+		} else {
+			DAO<CoursParticulier> cP = new CoursParticulierDAO();
+			c = cP.inserer((CoursParticulier) c);
+			liste.add(c);
+			return c;
+		}
+	}
+
+	public Cours mettreAjourCours(Cours c) {
+		if (c instanceof CoursCollectif) {
+			DAO<CoursCollectif> cC = new CoursCollectifDAO();
+			cC.mettreAJour((CoursCollectif) c);
+			return c;
+		} else {
+			DAO<CoursParticulier> cP = new CoursParticulierDAO();
+			c = cP.mettreAJour((CoursParticulier) c);
+			return c;
+		}
 	}
 
 	public ArrayList<Cours> getListe() {

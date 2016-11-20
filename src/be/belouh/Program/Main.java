@@ -4,6 +4,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import be.belouh.Controlleur.ControlleurConnexion;
+import be.belouh.Singleton.ListeReservationS;
 
 public class Main {
 	public static void main(String[] args) {
@@ -17,6 +18,7 @@ public class Main {
 		} catch (Exception e) {
 			// Si nimbus n'est pas disponible on laisse le theme par defaut
 		}
+		ListeReservationS.getInstance().actualiserStatut();
 		new ControlleurConnexion();
 	}
 }
