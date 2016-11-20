@@ -19,6 +19,7 @@ public class ControlleurMoniteur {
 	private EcranMoniteur vue;
 	private MoniteurM modele;
 	private boolean coursCollectif = true;
+	private Object[][] data;
 	private Semaine semaineCourante = ListeSemaineS.getInstance().getListe().get(0);
 	private String champCoursCollectif[] = { "Sport", "Niveau", "Catégorie d'élève", "Heure début", "Heure fin",
 			"Nombre d'élève" };
@@ -49,21 +50,23 @@ public class ControlleurMoniteur {
 		});
 
 		vue.addmenu3Item1Listener(e -> {
-			semaineCourante = (Semaine) vue.Chosis(ListeSemaineS.getInstance().getListe().toArray());
+			semaineCourante = (Semaine) vue.Chosis(ListeSemaineS.getInstance().getListe().toArray(), "Semaine du",
+					"Choisir une semaine");
 			miseAjourData();
 		});
 
 		vue.addListeListener(e -> {
-			if(!e.getValueIsAdjusting()){
-				ListSelectionModel lsm = (ListSelectionModel)e.getSource();
-				if(!lsm.isSelectionEmpty()){
+			if (!e.getValueIsAdjusting()) {
+				ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+				if (!lsm.isSelectionEmpty()) {
 					int selectedRow = lsm.getMinSelectionIndex();
 					StringBuilder msg = new StringBuilder("");
-					Cours c = modele.getCours(vue.getDataSelection(selectedRow, 6), coursCollectif, semaineCourante);
+					Cours c = modele.getCours(data[selectedRow]);
 					for (Eleve eleve : c.getListeEleve()) {
-						msg.append(eleve.toString());
+						msg.append("- " + eleve.toString());
 					}
 					vue.afficheMessage(msg.toString(), "Liste d'élève de ce cours", JOptionPane.PLAIN_MESSAGE);
+					lsm.clearSelection();
 				}
 			}
 		});
@@ -77,7 +80,7 @@ public class ControlleurMoniteur {
 				label = "Voici votre liste de cours collectifs (" + semaineCourante.toString() + ")";
 				liste = modele.triCours(coursCollectif, semaineCourante);
 
-				Object[][] data = new Object[liste.size()][6];
+				data = new Object[liste.size()][7];
 
 				for (int i = 0; i < liste.size(); i++) {
 					data[i][0] = ((CoursCollectif) liste.get(i)).getTypeCours().getAccreditation().getSport();
@@ -90,13 +93,14 @@ public class ControlleurMoniteur {
 					data[i][3] = ((CoursCollectif) liste.get(i)).getHoraire().getHeureDeb() + "h";
 					data[i][4] = ((CoursCollectif) liste.get(i)).getHoraire().getHeureFin() + "h";
 					data[i][5] = ((CoursCollectif) liste.get(i)).getListeEleve().size();
+					data[i][6] = ((CoursCollectif) liste.get(i)).getId();
 				}
 				vue.afficherliste(data, champCoursCollectif, label);
 			} else {
 				label = "Voici votre liste de cours particuliers (" + semaineCourante.toString() + ")";
 				liste = modele.triCours(coursCollectif, semaineCourante);
 
-				Object[][] data = new Object[liste.size()][6];
+				data = new Object[liste.size()][7];
 
 				for (int i = 0; i < liste.size(); i++) {
 					data[i][0] = ((CoursParticulier) liste.get(i)).getAccreditation().getSport();
@@ -109,6 +113,7 @@ public class ControlleurMoniteur {
 					data[i][3] = ((CoursParticulier) liste.get(i)).getHoraire().getHeureFin() + "h";
 					data[i][4] = ((CoursParticulier) liste.get(i)).getListeEleve().size();
 					data[i][5] = new SimpleDateFormat("dd/MM/yyyy").format(((CoursParticulier) liste.get(i)).getDate());
+					data[i][6] = ((CoursParticulier) liste.get(i)).getId();
 				}
 				vue.afficherliste(data, champCoursParticulier, label);
 			}

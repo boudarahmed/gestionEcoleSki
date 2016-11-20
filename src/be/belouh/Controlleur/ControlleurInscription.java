@@ -33,7 +33,9 @@ public class ControlleurInscription {
 						vue.getNumero(), vue.getRue(), vue.getCodePostal(), vue.getVille(), vue.getAdresseMail(),
 						vue.getMotDePasse(), vue.getNumeroCompte());
 				if (modele.Inscription()) {
+					vue.afficheMessage("Votre inscription a bien été prise en compte", "Merci", JOptionPane.INFORMATION_MESSAGE);
 					vue.dispose();
+					new ControlleurClient((ClientM) modele);
 				} else {
 					vue.afficheMessage("Cette adresse e-mail est déjà utilisée par un autre client", "Erreur",
 							JOptionPane.ERROR_MESSAGE);

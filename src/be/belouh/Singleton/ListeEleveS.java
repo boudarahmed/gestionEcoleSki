@@ -14,7 +14,8 @@ public class ListeEleveS {
 	private static ListeEleveS instance = null;
 
 	private ListeEleveS() {
-		//On récupere tous les eleves de la base de données et on rempli leur liste de reservation grace au singleton liste de reservation
+		// On récupere tous les eleves de la base de données et on rempli leur
+		// liste de reservation grace au singleton liste de reservation
 		DAO<Eleve> m = new EleveDAO();
 		ArrayList<Integer> id = m.compter();
 		ListeReservationS listeReservation = ListeReservationS.getInstance();
@@ -23,12 +24,12 @@ public class ListeEleveS {
 
 		while (it.hasNext())
 			liste.add(m.trouver(it.next()));
-		
+
 		itE = liste.iterator();
-		while(itE.hasNext()){
+		while (itE.hasNext()) {
 			Eleve eleve = itE.next();
 			for (Reservation reservation : listeReservation.getListe()) {
-				if(reservation.getEleve().equals(eleve))
+				if (reservation.getEleve().equals(eleve))
 					eleve.getListeReservation().add(reservation);
 			}
 		}
@@ -38,6 +39,21 @@ public class ListeEleveS {
 		if (instance == null)
 			instance = new ListeEleveS();
 		return instance;
+	}
+
+	public Eleve ajouterEleve(Eleve e) {
+		DAO<Eleve> el = new EleveDAO();
+		boolean flag = false;
+		for (Eleve eleve : liste) {
+			if (eleve.equals(e) && eleve.getClient().equals(e.getClient()))
+				flag = true;
+		}
+		if (!flag) {
+			e = el.inserer(e);
+			liste.add(e);
+			return e;
+		} else
+			return null;
 	}
 
 	public ArrayList<Eleve> getListe() {

@@ -1,9 +1,6 @@
 package be.belouh.Modele;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.stream.Collectors;
 
 import be.belouh.POJO.Cours;
@@ -36,43 +33,9 @@ public class MoniteurM extends UtilisateurM {
 		return liste;
 	}
 
-	public Cours getCours(Object[] data, boolean coursCollectif, Semaine s) {
-		Cours res = null;
+	public Cours getCours(Object[] data) {
 		ArrayList<Cours> liste = ((Moniteur) getUtilisateur()).getListeCours();
-		int max, heureDeb, heureFin;
-		if (coursCollectif) {
-			max = (((String) data[2]).equals("adulte")) ? 0 : 12;
-			heureDeb = Integer.parseInt(((String) data[3]).substring(0, ((String) data[3]).length() - 1));
-			heureFin = Integer.parseInt(((String) data[4]).substring(0, ((String) data[4]).length() - 1));
-			res = liste.stream().filter(x -> x instanceof CoursCollectif
-					&& ((CoursCollectif) x).getTypeCours().getAccreditation().getSport().equals((String) data[0])
-					&& ((CoursCollectif) x).getTypeCours().getNiveau().equals((String) data[1])
-					&& ((CoursCollectif) x).getTypeCours().getAccreditation().getAgeMax() == max
-					&& ((CoursCollectif) x).getHoraire().getHeureDeb() == heureDeb
-					&& ((CoursCollectif) x).getHoraire().getHeureFin() == heureFin
-					&& ((CoursCollectif) x).getListeEleve().size() == (Integer) data[5]).findAny().orElse(null);
-		} else {
-			max = (((String) data[1]).equals("adulte")) ? 0 : 12;
-			heureDeb = Integer.parseInt(((String) data[2]).substring(0, ((String) data[2]).length() - 1));
-			heureFin = Integer.parseInt(((String) data[3]).substring(0, ((String) data[3]).length() - 1));
-			Date d = new Date();
-			try {
-				d = new SimpleDateFormat("dd/MM/yyyy").parse((String) data[5]);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			final Date date = d;
-			res = liste.stream()
-					.filter(x -> x instanceof CoursParticulier
-							&& ((CoursParticulier) x).getAccreditation().getSport().equals((String) data[0])
-							&& ((CoursParticulier) x).getAccreditation().getAgeMax() == max
-							&& ((CoursParticulier) x).getHoraire().getHeureDeb() == heureDeb
-							&& ((CoursParticulier) x).getHoraire().getHeureFin() == heureFin
-							&& ((CoursParticulier) x).getListeEleve().size() == (Integer) data[4]
-							&& ((CoursParticulier) x).getDate().equals(date))
-					.findAny().orElse(null);
-		}
-		return res;
+		return liste.stream().filter(x -> x.getId() == (Integer) data[6]).findAny().orElse(null);
 	}
 
 	@Override

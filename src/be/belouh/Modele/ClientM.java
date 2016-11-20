@@ -8,6 +8,8 @@ import be.belouh.POJO.Client;
 import be.belouh.POJO.Eleve;
 import be.belouh.POJO.Reservation;
 import be.belouh.Singleton.ListeClientS;
+import be.belouh.Singleton.ListeEleveS;
+import be.belouh.Singleton.ListeReservationS;
 
 public class ClientM extends UtilisateurM {
 	public ClientM() {
@@ -49,6 +51,50 @@ public class ClientM extends UtilisateurM {
 				.stream().filter(x -> x.getStatutReservation().equals(statut) && x.getEleve().equals(eleve))
 				.collect(Collectors.toList());
 		return liste;
+	}
+
+	public Reservation getReservation(Object[] data) {
+		return ((Client) getUtilisateur()).getListeReservation().stream().filter(x -> x.getId() == (Integer) data[3])
+				.findAny().orElse(null);
+	}
+
+	public boolean ajoutEleve(Eleve e) {
+		ListeEleveS liste = ListeEleveS.getInstance();
+		e = liste.ajouterEleve(e);
+
+		if (e == null)
+			return false;
+		else {
+			((Client) utilisateur).getListeEleve().add(e);
+			return true;
+		}
+	}
+
+	public boolean ajoutReservation(Reservation r) {
+		ListeReservationS liste = ListeReservationS.getInstance();
+		r = liste.ajouterReservation(r);
+
+		if (r == null)
+			return false;
+		else {
+			((Client) utilisateur).getListeReservation().add(r);
+			return true;
+		}
+	}
+
+	public void miseAjourReservation(Reservation r) {
+		ListeReservationS liste = ListeReservationS.getInstance();
+		r = liste.mettreAjourReservation(r);
+	}
+
+	public boolean supprimerReservation(Reservation r) {
+		ListeReservationS liste = ListeReservationS.getInstance();
+		if (liste.supprimerReservation(r)) {
+			((Client) utilisateur).getListeReservation().remove(r);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

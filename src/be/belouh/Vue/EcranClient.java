@@ -68,7 +68,7 @@ public class EcranClient extends Fenetre {
 	public JComboBox<Eleve> getComboEleve() {
 		return comboEleve;
 	}
-	
+
 	public String getRadioStatut() {
 		if (radioCommander.isSelected())
 			return radioCommander.getText();
@@ -129,7 +129,7 @@ public class EcranClient extends Fenetre {
 		panel.add(scrollPanel);
 		panel.add(labelInfo);
 	}
-	
+
 	public void afficherliste(Object[][] data, String[] title, String label) {
 		labelInfo.setText(label);
 		modele.setDataVector(data, title);

@@ -1,5 +1,6 @@
 package be.belouh.POJO;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CoursParticulier extends Cours {
@@ -76,7 +77,7 @@ public class CoursParticulier extends Cours {
 
 	@Override
 	public String toString() {
-		return "Cours particulier de " + this.getAccreditation().toString() + " ans le " + this.getDate() + " de "
-				+ this.getHoraire();
+		return "- Cours particulier de " + this.getAccreditation().getSport() + " le " + new SimpleDateFormat("dd/MM/yyyy").format(this.getDate()) + " de "
+				+ this.getHoraire() + "\n";
 	}
 }

@@ -53,15 +53,6 @@ public class EcranMoniteur extends Fenetre {
 
 	}
 
-	// RECUPERATION DONNEES DE L'ECRAN MONITEUR
-	public Object[] getDataSelection(int l, int c) {
-		Object[] res = new Object[c];
-		for(int i = 0; i < c; i++){
-			res[i] = listeCours.getModel().getValueAt(l, i);
-		}
-		return res;
-	}
-
 	// METHODES D'AFFICHAGE DE L'ECRAN MONITEUR
 	public void creationPanel() {
 		panel.setOpaque(true);

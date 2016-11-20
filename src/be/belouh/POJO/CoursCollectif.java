@@ -51,6 +51,8 @@ public class CoursCollectif extends Cours {
 
 	@Override
 	public String toString() {
-		return this.getTypeCours().toString() + "\n" + this.getSemaine().toString() + "\n" + this.getHoraire().toString();
+		return "- Cours de " + this.getTypeCours().getAccreditation().getSport() + " niveau "
+				+ this.getTypeCours().getNiveau() + " du " + this.getSemaine().toString() + " de "
+				+ this.getHoraire().toString() + "\n";
 	}
 }

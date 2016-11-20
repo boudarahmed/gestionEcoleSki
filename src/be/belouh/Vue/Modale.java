@@ -1,13 +1,18 @@
 package be.belouh.Vue;
 
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-public abstract class Fenetre extends JFrame {
+public abstract class Modale extends JDialog {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	public Modale(Fenetre f, String title) {
+		super(f, title, true);
+	}
 
 	public void afficheMessage(String msg, String title, int type) {
 		JOptionPane.showMessageDialog(this, msg, title, type);
@@ -18,10 +23,5 @@ public abstract class Fenetre extends JFrame {
 			return true;
 		else
 			return false;
-	}
-
-	public Object Chosis(Object[] valeurs, String choix, String title) {
-		return JOptionPane.showInputDialog(this, choix, title, JOptionPane.PLAIN_MESSAGE, null,
-				valeurs, valeurs[0]);
 	}
 }
