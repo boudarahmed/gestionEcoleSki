@@ -30,10 +30,4 @@ public class ListeHoraireS {
 	public ArrayList<Horaire> getListe() {
 		return liste;
 	}
-
-	public static void main(String[] args) {
-		ListeHoraireS l = ListeHoraireS.getInstance();
-
-		System.out.println(l.getListe());
-	}
 }
